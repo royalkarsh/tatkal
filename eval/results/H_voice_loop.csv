@@ -1,0 +1,7 @@
+spoken,transcript,expected,deterministic,llm,acted_correctly,unsafe_action
+"Haan bhai, saamaan de diya tha.","हाँ भाई, saamaan दे दिया था।",goods_delivered_yes,goods_delivered_yes,goods_delivered_yes,True,False
+"Nahi, usne kuch liya hi nahi.",नहीं उसने कुछ लिया ही नहीं।,goods_not_delivered,goods_not_delivered,goods_not_delivered,True,False
+"Pata nahi, yaad nahi hai.",पता नहीं याद नहीं है।,unclear,unclear,unclear,True,False
+Refund already kar diya maine.,refund already कर दिया मैंने।,refund_already_claimed,refund_already_claimed,unclear,True,False
+"Haan, refund kar do.",हा refund करतो.,refund_yes,unclear,refund_yes,False,False
+"Nahi, refund mat karo.",नहीं refund मत करो।,refund_declined,refund_declined,refund_declined,True,False

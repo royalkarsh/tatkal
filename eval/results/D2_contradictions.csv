@@ -1,0 +1,7 @@
+reply,expected,got,unsafe_action,match
+"Haan, saamaan de diya, but customer took nothing",reask,reask,False,True
+"Yes, I gave him the goods, but the customer did not get them",reask,reask,False,True
+I handed over the goods. Actually I did not.,reask,reask,False,True
+Haan de diya lekin usne kuch nahi liya,reask,reask,False,True
+हाँ दे दिया पर ग्राहक ने कुछ नहीं लिया,reask,reask,False,True
+"Haan saamaan de diya tha, asal mein nahi diya",reask,reask,False,True

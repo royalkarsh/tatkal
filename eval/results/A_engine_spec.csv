@@ -1,0 +1,48 @@
+txn,expected,got_path,pass,diffs
+A01,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_PENDING,True,{}
+A02,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A03,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A04,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_FAILED_DEBITED,True,{}
+A05,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A06,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": false}",DUPLICATE,True,{}
+A07,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_PENDING,True,{}
+A08,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A09,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A10,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_FAILED_DEBITED,True,{}
+A11,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A12,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": false}",DUPLICATE,True,{}
+A13,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_PENDING,True,{}
+A14,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A15,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A16,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_FAILED_DEBITED,True,{}
+A17,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A18,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": false}",DUPLICATE,True,{}
+A19,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_PENDING,True,{}
+A20,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A21,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A22,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": false}",P2M_FAILED_DEBITED,True,{}
+A23,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A24,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": false}",DUPLICATE,True,{}
+A25,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": true}",P2M_PENDING,True,{}
+A26,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A27,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A28,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": true}",P2M_FAILED_DEBITED,True,{}
+A29,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A30,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": true}",DUPLICATE,True,{}
+A31,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": true}",P2M_PENDING,True,{}
+A32,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A33,"{""path"": ""SOUNDBOX_MISSED"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",SOUNDBOX_MISSED,True,{}
+A34,"{""path"": ""P2M_FAILED_DEBITED"", ""udir_code"": ""U009"", ""tat_days"": 5, ""deadline"": ""2026-11-04"", ""escalate"": true}",P2M_FAILED_DEBITED,True,{}
+A35,"{""path"": ""NO_DEBIT"", ""udir_code"": null, ""tat_days"": null, ""deadline"": null, ""escalate"": false}",NO_DEBIT,True,{}
+A36,"{""path"": ""DUPLICATE"", ""udir_code"": ""U023"", ""tat_days"": null, ""deadline"": null, ""escalate"": true}",DUPLICATE,True,{}
+L0,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""deadline"": ""2026-10-29"", ""escalate"": true, ""compensation_due_inr"": 200}",P2M_PENDING,True,{}
+L1,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""deadline"": ""2026-10-25"", ""escalate"": true, ""compensation_due_inr"": 600}",P2M_PENDING,True,{}
+L2,"{""path"": ""P2M_PENDING"", ""udir_code"": ""U022"", ""deadline"": ""2026-10-31"", ""escalate"": false, ""compensation_due_inr"": 0}",P2M_PENDING,True,{}
+P0,"{""path"": ""P2P_PENDING"", ""udir_code"": ""U010"", ""escalate"": false}",P2P_PENDING,True,{}
+P1,"{""path"": ""P2P_FAILED_DEBITED"", ""udir_code"": ""U005"", ""escalate"": false}",P2P_FAILED_DEBITED,True,{}
+P2,"{""path"": ""P2P_CREDITED"", ""udir_code"": null, ""escalate"": false}",P2P_CREDITED,True,{}
+G1,"{""path"": ""GOODS_DISPUTE"", ""udir_code"": ""U008"", ""escalate"": true}",GOODS_DISPUTE,True,{}
+R1,"{""path"": ""P2M_REVERSED"", ""compensation_due_inr"": 0}",P2M_REVERSED,True,{}
+R2,"{""path"": ""P2M_REVERSED"", ""compensation_due_inr"": 300}",P2M_REVERSED,True,{}
+X1,"{""path"": ""HUMAN_REVIEW"", ""escalate"": true}",HUMAN_REVIEW,True,{}
+X2,"{""path"": ""HUMAN_REVIEW"", ""escalate"": true}",HUMAN_REVIEW,True,{}

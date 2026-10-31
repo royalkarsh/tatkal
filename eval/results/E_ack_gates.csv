@@ -1,0 +1,18 @@
+test,pass
+response ack dropped,True
+"complaint unacknowledged, merchant says yes",True
+"recheck acknowledges, then 105 allowed",True
+complaint never acknowledged,True
+rail refuses direct response to unacknowledged complaint,True
+human after RESOLVED,True
+rail refuses 105 with no warrant,True
+rail refuses a 106 warrant used for 105,True
+rail refuses a warrant signed by anyone but the policy gate,True
+rail refuses a correctly signed warrant whose readers disagree,True
+rail object exposes no way to mint a warrant,True
+warrant cannot be replayed,True
+105 then 106 on the same complaint: 106 refused,True
+"106 with lost acknowledgement, then 105: 105 refused",True
+"incoming U022, shop never credited: no question, no 105",True
+rail refuses 105 with a valid warrant when the ledger shows no credit,True
+spoken yes is read back; a 'nahi' on read back sends nothing,True

@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tatkal Console</title>
+<style>
+/* Inter and JetBrains Mono, self hosted (SIL OFL 1.1, see assets/OFL-*.txt): works offline at the venue */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/assets/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/assets/inter-latin-ext-400-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/assets/inter-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/assets/inter-latin-ext-500-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/assets/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/assets/inter-latin-ext-600-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/assets/inter-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(/assets/inter-latin-ext-700-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:800;font-display:swap;src:url(/assets/inter-latin-800-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:800;font-display:swap;src:url(/assets/inter-latin-ext-800-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:900;font-display:swap;src:url(/assets/inter-latin-900-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:900;font-display:swap;src:url(/assets/inter-latin-ext-900-normal.woff2) format('woff2');unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/jetbrains-mono-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/jetbrains-mono-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --bg:#F2F6FB;--bg2:#E9F0F8;--panel:#FFFFFF;--panel2:#F5F8FC;--line:#E1E8F2;--line2:#CFDAE8;
+  --text:#0B1F44;--muted:#55678A;--faint:#5F6E8C;
+  --sun:#00B9F1;--sun2:#5CD6FF;--sunbg:rgba(0,185,241,.12);
+  --ok:#2bd48f;--okbg:rgba(43,212,143,.12);--bad:#ff5c6c;--badbg:rgba(255,92,108,.12);
+  --info:#5aa9ff;--violet:#a493ff;--violetbg:rgba(164,147,255,.13);--warn:#ffc23d;--warnbg:rgba(255,194,61,.12);
+  --r:18px;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(1200px 600px at 15% -10%,#13224a 0,transparent 60%),radial-gradient(900px 500px at 100% 0,#2a1a0c 0,transparent 55%),var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari",Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer}
+::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#24314f;border-radius:8px}
+
+/* ---------- top */
+.top{position:relative;z-index:60;display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);background:rgba(6,10,19,.72);backdrop-filter:blur(10px);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.mark{width:38px;height:38px;border-radius:11px;background:conic-gradient(from 200deg,var(--sun),#0096DB,var(--sun2),var(--sun));display:grid;place-items:center;font-weight:900;color:#002E6E;font-size:19px;box-shadow:0 6px 24px rgba(0,185,241,.35)}
+.brand b{font-size:21px;font-weight:800;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-size:12px;font-weight:500}
+.scen{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:thin}
+.top>.chips{flex:none}
+.sc{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:6px 9px;text-align:left;width:92px;transition:.2s}
+.sc b{display:block;font-size:13px;white-space:nowrap}.sc span{display:block;font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc:hover{border-color:var(--line2);transform:translateY(-1px)}
+.sc.on{border-color:var(--sun);background:linear-gradient(180deg,rgba(0,185,241,.16),rgba(0,185,241,.04));box-shadow:0 0 0 3px rgba(0,185,241,.12)}
+.btn{border:1px solid var(--line2);background:var(--panel2);border-radius:12px;padding:9px 14px;font-weight:700;font-size:14px;transition:.15s}
+.btn:hover{border-color:#3a4c78}
+.btn.play{background:linear-gradient(135deg,var(--sun),#0096DB);border-color:transparent;color:#002E6E;box-shadow:0 8px 26px rgba(0,185,241,.32)}
+.btn.sm{padding:6px 10px;font-size:12.5px;border-radius:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;gap:7px;align-items:center;font-size:12px;font-weight:700;padding:6px 10px;border-radius:99px;border:1px solid var(--line);background:var(--panel)}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--faint)}
+.chip.ok i{background:var(--ok);box-shadow:0 0 10px var(--ok)}.chip.bad{border-color:#5a2230;color:#ffc3ca}.chip.bad i{background:var(--bad);box-shadow:0 0 10px var(--bad)}
+.chip.warn{border-color:#5a4718;color:#ffe2a0}.chip.warn i{background:var(--warn)}
+.menu{position:relative}.pop{display:none;position:absolute;right:0;top:46px;width:330px;background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:14px;z-index:30;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.menu.open .pop{display:block}.pop h4{margin:6px 2px 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.pop select{width:100%;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:8px}
+.pop label{display:flex;gap:10px;padding:7px 2px;font-size:14px;cursor:pointer}.pop label small{display:block;color:var(--muted);font-size:12px}
+
+/* ---------- pipeline */
+.pipe{margin:16px 24px 0;padding:18px 22px 16px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(18,28,49,.9),rgba(14,22,39,.9));position:relative;overflow:hidden}
+.pipe h3{margin:0 0 14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between}
+.pipe h3 span{color:var(--muted);letter-spacing:0;text-transform:none;font-size:12.5px;font-weight:500}
+.nodes{display:grid;grid-template-columns:repeat(7,1fr);position:relative}
+.track{position:absolute;left:7%;right:7%;top:22px;height:3px;background:var(--line);border-radius:3px}
+.fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .9s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 14px rgba(0,185,241,.6)}
+.comet{position:absolute;top:-5px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(0,185,241,.35),0 0 24px var(--sun);left:0;transition:left .9s cubic-bezier(.2,.8,.2,1);transform:translateX(-50%)}
+.node{position:relative;text-align:center;padding:0 4px;z-index:1}
+.dot{width:46px;height:46px;margin:0 auto;border-radius:14px;display:grid;place-items:center;background:var(--panel2);border:1px solid var(--line2);font-size:20px;transition:.35s;position:relative}
+.node .t{margin-top:9px;font-weight:700;font-size:13px;color:var(--muted);transition:.3s}
+.node .c{margin-top:3px;font:600 11.5px/1.35 var(--mono);color:var(--faint);min-height:30px;transition:.3s;word-break:break-word}
+.node.done .dot{background:var(--okbg);border-color:rgba(43,212,143,.55);box-shadow:0 0 22px rgba(43,212,143,.25)}
+.node.done .t{color:var(--text)}.node.done .c{color:#9fe9c7}
+.node.active .dot{background:var(--sunbg);border-color:var(--sun);animation:glow 1.4s ease-in-out infinite}
+.node.active .t{color:var(--sun2)}.node.active .c{color:var(--sun2)}
+.node.blocked .dot{background:var(--badbg);border-color:var(--bad);box-shadow:0 0 22px rgba(255,92,108,.3)}
+.node.blocked .t{color:#ffb3bc}.node.blocked .c{color:#ff9aa5}
+.node.skip{opacity:.42}
+.node.skip .dot{border-style:dashed}
+@keyframes glow{50%{box-shadow:0 0 0 7px rgba(0,185,241,.12),0 0 30px rgba(0,185,241,.45)}}
+
+/* ---------- stage */
+.stage{display:grid;grid-template-columns:330px minmax(0,1fr) 330px;gap:20px;padding:20px 24px;max-width:1760px;margin:0 auto;align-items:start}
+.stage>*{min-width:0}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 10px 4px;display:flex;justify-content:space-between}
+.lbl span{letter-spacing:0;text-transform:none;font-weight:600;color:var(--muted)}
+
+/* phone */
+.phone{border-radius:44px;padding:11px;background:linear-gradient(145deg,#2b3550,#0c1222);box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07)}
+.screen{border-radius:34px;background:#f6f7fb;color:#101828;height:650px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:12px 24px 4px;font:700 13px Inter,sans-serif}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:20px;background:#0c1222}
+.apph{display:flex;align-items:center;gap:10px;padding:10px 16px 12px;border-bottom:1px solid #e6e9f0;background:#fff}
+.av{width:38px;height:38px;border-radius:12px;background:conic-gradient(from 200deg,var(--sun),#0096DB,var(--sun2),var(--sun));display:grid;place-items:center;color:#002E6E;font-weight:900}
+.apph b{display:block;font-size:15px}.apph small{display:block;color:#667085;font-size:12px}
+.chat{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:9px}
+.m{max-width:86%;padding:10px 12px;border-radius:18px;font-size:14px;line-height:1.45;animation:in .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.m.me{align-self:flex-end;background:#101828;color:#fff;border-bottom-right-radius:6px}
+.m.bot{align-self:flex-start;background:#fff;border:1px solid #e4e7ee;border-bottom-left-radius:6px;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+.m.sys{align-self:center;max-width:95%;background:#fff7e6;border:1px dashed #f3c46e;color:#8a5a00;font-size:12.5px;text-align:center;border-radius:12px}
+.m .meta{display:flex;gap:8px;align-items:center;margin-top:6px;font-size:11px;color:#98a2b3}
+.m .meta button{border:0;background:#fff3e8;color:#0077B0;border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700}
+.typing{align-self:flex-start;background:#fff;border:1px solid #e4e7ee;border-radius:16px;padding:10px 14px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#98a2b3;animation:bl 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.2;transform:translateY(-2px)}}
+.qr{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 0}
+.q{border:1px solid #e0e4ec;background:#fff;color:#344054;border-radius:99px;padding:6px 11px;font-size:12.5px;font-weight:600}
+.q:hover{border-color:var(--sun);color:#0077B0}
+.comp{display:flex;gap:7px;padding:10px 12px 16px}
+.comp input{flex:1;min-width:0;border:1px solid #e0e4ec;border-radius:99px;padding:10px 14px;background:#fff;color:#101828}
+.rb{width:42px;height:42px;border-radius:50%;border:1px solid #e0e4ec;background:#fff;color:#101828;display:grid;place-items:center;flex:none;font-size:16px}
+.rb.go{background:#101828;color:#fff;border-color:#101828}
+.rb.rec{background:var(--bad);color:#fff;border-color:var(--bad);animation:pul 1s infinite}
+@keyframes pul{50%{box-shadow:0 0 0 9px rgba(255,92,108,.2)}}
+
+/* soundbox */
+.box{border-radius:30px;padding:16px;background:linear-gradient(160deg,#141f36,#0b1222);border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.dev{margin:2px auto 14px;width:220px;border-radius:30px;padding:16px 16px 14px;background:linear-gradient(160deg,#2a3654,#151e33 60%);border:1px solid #33446a;box-shadow:inset 0 2px 0 rgba(255,255,255,.06),0 18px 40px rgba(0,0,0,.45);position:relative}
+.grill{height:96px;border-radius:20px;background:radial-gradient(#4a5d86 2.3px,transparent 2.8px) 0 0/11px 11px,#18233b;display:grid;place-items:center;position:relative;overflow:hidden}
+.ring{position:absolute;inset:0;border-radius:20px}
+.dev.talk .ring{animation:ring 1.2s ease-out infinite;box-shadow:inset 0 0 0 2px rgba(0,185,241,.6)}
+@keyframes ring{0%{opacity:1}100%{opacity:0;transform:scale(1.08)}}
+.wave{display:flex;gap:4px;align-items:center;height:40px;position:relative;z-index:1}
+.wave i{width:5px;border-radius:3px;background:var(--sun);height:6px;opacity:.35}
+.dev.talk .wave i,.dev.listen .wave i{opacity:1;animation:wv .8s ease-in-out infinite}
+.dev.listen .wave i{background:var(--ok)}
+.wave i:nth-child(2){animation-delay:.08s}.wave i:nth-child(3){animation-delay:.16s}.wave i:nth-child(4){animation-delay:.24s}.wave i:nth-child(5){animation-delay:.32s}.wave i:nth-child(6){animation-delay:.4s}.wave i:nth-child(7){animation-delay:.48s}
+@keyframes wv{0%,100%{height:6px}50%{height:34px}}
+.lcd{margin-top:12px;border-radius:12px;padding:9px 10px;text-align:center;font:700 15px/1.25 var(--mono);letter-spacing:.05em;background:#06231a;color:#6ff3b5;text-shadow:0 0 10px rgba(111,243,181,.5);border:1px solid #0f3b2b;min-height:44px}
+.lcd.pend{background:#2a1c05;color:#ffcc70;text-shadow:0 0 10px rgba(255,204,112,.5);border-color:#4a3410}
+.lcd.bad{background:#2b0a0f;color:#ff9aa5;text-shadow:0 0 10px rgba(255,154,165,.5);border-color:#4f1a22}
+.leds{display:flex;justify-content:center;gap:6px;margin-top:10px}.leds i{width:7px;height:7px;border-radius:50%;background:#26324f}
+.leds i.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.box .chat{background:transparent;padding:2px;height:250px;flex:none}
+.box .m.bot{background:#18233b;border-color:#CFDAE8;color:#0B1F44;box-shadow:none}
+.box .m.me{background:linear-gradient(135deg,var(--sun),#0096DB);color:#002E6E;font-weight:600}
+.box .m .meta{color:#7d8aa5}.box .m .meta button{background:rgba(0,185,241,.15);color:var(--sun2)}
+.box .qr{padding:8px 0 0}.box .q{background:#18233b;border-color:#CFDAE8;color:#dfe7f5}
+.box .comp{padding:10px 0 0}.box .comp input{background:#F5F8FC;border-color:#CFDAE8;color:#fff}
+.box .rb{background:#18233b;border-color:#CFDAE8;color:#fff}.box .rb.go{background:var(--sun);border-color:var(--sun);color:#002E6E}
+.wait{font-size:12.5px;color:var(--faint);padding:6px 2px 0}
+.rail{margin-top:12px;border-radius:14px;padding:11px 12px;font-size:12.5px;border:1px solid var(--line);background:#0c1424;color:#b9c6dc}
+.rail b{display:block;color:#fff;font-size:13px;margin-bottom:2px}
+.rail.ok{border-color:rgba(43,212,143,.4);background:linear-gradient(180deg,rgba(43,212,143,.12),rgba(43,212,143,.03))}
+.rail.bad{border-color:rgba(255,92,108,.45);background:linear-gradient(180deg,rgba(255,92,108,.12),rgba(255,92,108,.03))}
+.rail .btn{width:100%;margin-top:8px}
+
+/* center */
+.center{display:flex;flex-direction:column;gap:18px}
+.card{border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(18,28,49,.92),rgba(13,21,37,.92));padding:20px}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.amt{font-size:52px;font-weight:900;letter-spacing:-1.5px;line-height:1;background:linear-gradient(180deg,#fff,#c9d4e8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.who{color:var(--muted);font-size:14px}.who b{color:var(--text)}
+.verdict{font-size:26px;font-weight:800;line-height:1.15;margin-top:4px;letter-spacing:-.3px}
+.verdict.sun{color:var(--sun2)}.verdict.ok{color:var(--ok)}.verdict.bad{color:#ff8d99}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tag{font:700 12px/1 var(--mono);padding:7px 9px;border-radius:9px;border:1px solid var(--line2);background:var(--panel2);color:#c9d4e8}
+.tag.sun{border-color:rgba(0,185,241,.5);background:var(--sunbg);color:var(--sun2)}.tag.ok{border-color:rgba(43,212,143,.45);background:var(--okbg);color:#7ff0c0}.tag.bad{border-color:rgba(255,92,108,.5);background:var(--badbg);color:#ffb0b9}
+.clock{margin-top:18px}
+.days{display:grid;gap:4px;position:relative}
+.day{text-align:center;font-size:11px;color:var(--faint)}
+.day i{display:block;height:10px;border-radius:5px;background:var(--line);margin-bottom:6px;transition:background .4s}
+.day.past i{background:linear-gradient(90deg,var(--sun),var(--sun2))}.day.today i{background:var(--sun);box-shadow:0 0 12px var(--sun)}
+.day.dl i{background:transparent;border:2px solid var(--ok)}.day.late i{background:var(--bad);box-shadow:0 0 10px rgba(255,92,108,.5)}
+.day b{display:block;color:var(--muted);font-size:11.5px}.day.today b,.day.dl b{color:var(--text)}
+.facts{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:10px;margin-top:16px}
+.fact{border:1px solid var(--line);border-radius:14px;padding:11px 13px;background:rgba(10,16,32,.6)}
+.fact span{display:block;font-size:11px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+.fact b{display:block;font-size:15px;margin-top:3px}
+.fact.wide b{font-size:13.5px;font-weight:600;line-height:1.35}
+.why{margin-top:12px;color:var(--muted);font-size:13.5px}
+.empty{text-align:center;padding:44px 20px}
+.empty b{display:block;font-size:26px;margin-bottom:8px}.empty p{color:var(--muted);max-width:520px;margin:0 auto 16px}
+
+.gate{padding:0;overflow:hidden}
+.gh{padding:16px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line)}
+.gh b{font-size:17px}.gh small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+.lock{font-size:26px;transition:.4s}
+.checks{display:grid;grid-template-columns:1fr 1fr}
+.ck{display:flex;gap:11px;align-items:flex-start;padding:12px 20px;border-bottom:1px solid var(--line);font-size:14px;opacity:.35;transform:translateX(-4px);transition:opacity .35s,transform .35s}
+.ck.show{opacity:1;transform:none}
+.ck:nth-child(odd){border-right:1px solid var(--line)}
+.ck i{flex:none;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:13px;background:var(--panel2);color:var(--faint);border:1px solid var(--line2)}
+.ck.y i{background:var(--ok);color:#03251a;border-color:var(--ok);box-shadow:0 0 14px rgba(43,212,143,.4)}
+.ck.n i{background:var(--bad);color:#2a0409;border-color:var(--bad);box-shadow:0 0 14px rgba(255,92,108,.4)}
+.ck small{display:block;color:var(--muted);font-size:12px}.ck code{font:600 12px var(--mono);color:#c9d4e8}
+.ck.sarv code{color:var(--violet)}
+.out{padding:18px 20px;display:flex;align-items:center;gap:18px;min-height:96px}
+.out.wait{color:var(--muted)}
+.ticket{flex:1;display:flex;border-radius:14px;overflow:hidden;position:relative;animation:tk .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes tk{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.ticket .l{width:120px;display:grid;place-items:center;font:900 30px var(--mono);border-right:2px dashed rgba(0,0,0,.25)}
+.ticket .r{flex:1;padding:12px 16px}
+.ticket .r b{display:block;font-size:16px}.ticket .r small{display:block;font-size:12.5px;opacity:.85;margin-top:2px}
+.ticket .r code{font:600 11.5px var(--mono);opacity:.9}
+.ticket.y{background:linear-gradient(135deg,#0f3a2a,#0c2a20);color:#c8f7e1;border:1px solid rgba(43,212,143,.45)}.ticket.y .l{color:var(--ok);background:rgba(43,212,143,.08)}
+.ticket.n{background:linear-gradient(135deg,#3a1218,#2a0d12);color:#ffd0d5;border:1px solid rgba(255,92,108,.45)}.ticket.n .l{color:var(--bad);background:rgba(255,92,108,.08);font-size:22px}
+.stamp{position:absolute;right:16px;top:50%;transform:translateY(-50%) rotate(-9deg) scale(1.6);opacity:0;font:900 13px var(--mono);letter-spacing:.12em;padding:6px 10px;border:3px solid currentColor;border-radius:8px;animation:st .5s .45s cubic-bezier(.2,1.4,.4,1) forwards}
+.ticket.y .stamp{color:var(--ok)}.ticket.n .stamp{color:var(--bad)}
+@keyframes st{to{opacity:.95;transform:translateY(-50%) rotate(-9deg) scale(1)}}
+
+.words .vr{display:flex;gap:12px;align-items:flex-start}
+.badge{flex:none;font:800 11px var(--mono);padding:6px 9px;border-radius:8px;letter-spacing:.06em}
+.badge.ok{background:var(--okbg);color:var(--ok);border:1px solid rgba(43,212,143,.4)}.badge.bad{background:var(--badbg);color:var(--bad);border:1px solid rgba(255,92,108,.45)}
+.said{font-size:15px}.said mark{background:rgba(255,92,108,.22);color:#ffb0b9;text-decoration:line-through;border-radius:4px;padding:0 3px}
+.src{font-size:12px;color:var(--faint);margin-top:3px}
+.viol{margin:8px 0 0;padding-left:18px;color:#ff9aa5;font-size:13px}
+.instead{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--okbg);border:1px solid rgba(43,212,143,.35);font-size:13.5px}
+.tester{display:flex;gap:8px;margin-top:14px}
+.tester input{flex:1;min-width:0;background:#0b1222;border:1px solid var(--line2);border-radius:12px;padding:10px 12px}
+.err{margin-top:8px;font-size:12.5px;color:var(--warn)}
+
+.hand{border-color:rgba(0,185,241,.45);background:linear-gradient(180deg,rgba(0,185,241,.10),rgba(13,21,37,.92))}
+.hand h4{margin:0 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun2)}
+.hand p{margin:0 0 12px;font-size:14px}
+.hand .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hand ul{margin:4px 0 0;padding-left:18px;font-size:13.5px;color:#cfd8e8}
+.hand .next{margin-top:12px;padding:10px 12px;border-radius:12px;background:rgba(0,185,241,.14);font-weight:700;font-size:13.5px}
+.mini{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* ---------- lower */
+.lower{margin:0 24px 110px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(18,28,49,.92),rgba(13,21,37,.92))}
+.tabs{display:flex;gap:4px;padding:0 16px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;padding:15px 14px 12px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent}
+.tabs button.on{color:var(--text);border-bottom-color:var(--sun)}
+.pane{padding:18px 20px}
+.cbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.cs{font-weight:800;padding:8px 12px;border-radius:12px;font-size:14px}
+.cs.ok{background:var(--okbg);color:var(--ok);border:1px solid rgba(43,212,143,.4)}.cs.bad{background:var(--badbg);color:var(--bad);border:1px solid rgba(255,92,108,.45)}
+.cnote{flex-basis:100%;font-size:13px;color:var(--muted)}
+.feed{max-height:380px;overflow:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+.ev{display:grid;grid-template-columns:44px 110px 200px 1fr 120px;gap:12px;align-items:start;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(10,16,32,.55);font-size:13px;animation:in .3s both}
+.ev .s{font:700 12px var(--mono);color:var(--faint)}
+.ev .a{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:99px;justify-self:start;background:var(--panel2);color:var(--muted)}
+.ev .a.tatkal{background:var(--sunbg);color:var(--sun2)}.ev .a.guard{background:var(--okbg);color:#7ff0c0}.ev .a.rail{background:rgba(90,169,255,.14);color:#9ccaff}
+.ev .a.merchant,.ev .a.customer{background:rgba(255,255,255,.08);color:#dfe7f5}.ev .a.rule_engine,.ev .a.engine{background:rgba(255,194,61,.12);color:#ffd77a}.ev .a.policy{background:var(--violetbg);color:var(--violet)}
+.ev .k{font:700 12px var(--mono);color:#c9d4e8}.ev .k.bad{color:#ff9aa5}.ev .k.good{color:#7ff0c0}
+.ev .h{font:500 11.5px var(--mono);color:var(--faint);text-align:right}
+.ev.broken{border-color:rgba(255,92,108,.6);background:var(--badbg)}
+
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.tile{border:1px solid var(--line);border-radius:16px;padding:16px;background:rgba(10,16,32,.6);position:relative;overflow:hidden}
+.tile:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ok)}
+.tile.sun:before{background:var(--sun)}
+.tile b{display:block;font-size:38px;font-weight:900;letter-spacing:-1px;line-height:1.05}
+.tile.ok b{color:#7ff0c0}.tile.sun b{color:var(--sun2)}
+.tile span{display:block;font-weight:700;margin-top:6px}.tile small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.evn{font-size:13px;color:var(--muted);margin:14px 0}
+.grp h4{margin:16px 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+details{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:rgba(10,16,32,.5)}
+summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;gap:14px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary .t{flex:1;font-weight:600;font-size:14px}summary .v{font:800 15px var(--mono);color:#c9d4e8}
+summary:after{content:"+";color:var(--faint);font-weight:800}details[open] summary:after{content:"−"}
+.db{padding:0 14px 14px;font-size:13px;color:var(--muted)}
+.mr{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px}.mr div b{display:block;font-size:20px;color:var(--text)}
+
+/* ---------- caption (autoplay) */
+.cap{position:fixed;left:50%;bottom:22px;z-index:80!important;transform:translateX(-50%) translateY(140%);width:min(980px,calc(100vw - 32px));background:rgba(8,13,26,.94);border:1px solid var(--line2);border-radius:18px;padding:14px 18px;display:flex;gap:14px;align-items:center;z-index:40;box-shadow:0 30px 70px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;backdrop-filter:blur(10px);opacity:0;pointer-events:none}
+.cap.on{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+.cap .n{flex:none;font:800 13px var(--mono);color:var(--sun2);background:var(--sunbg);border:1px solid rgba(0,185,241,.4);border-radius:10px;padding:6px 9px}
+.cap .x{flex:1;font-size:17px;font-weight:600;line-height:1.4}
+.cap .bar{position:absolute;left:18px;right:18px;bottom:6px;height:3px;border-radius:3px;background:var(--line);overflow:hidden}
+.cap .bar i{display:block;height:100%;width:0;background:var(--sun)}
+.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line2);padding:11px 16px;border-radius:12px;font-size:14px;display:none;z-index:50;box-shadow:0 18px 40px rgba(0,0,0,.5);max-width:90vw}
+
+@media(max-width:1500px){.brand .nm{display:none}.top{gap:10px;padding-left:16px;padding-right:16px}.sc{width:86px}}
+@media(max-width:1300px){.bl{display:none}}
+@media(max-width:1400px){.stage{grid-template-columns:300px minmax(0,1fr) 300px}.amt{font-size:44px}.tiles{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1180px){.stage{grid-template-columns:1fr 1fr}.center{grid-column:1/-1;order:-1}.nodes{grid-template-columns:repeat(4,1fr);row-gap:18px}.track{display:none}}
+@media(max-width:760px){.top,.pipe,.stage,.lower{padding-left:12px;padding-right:12px}.pipe,.lower{margin-left:12px;margin-right:12px}.stage{grid-template-columns:1fr}.nodes{grid-template-columns:repeat(2,1fr)}.facts{grid-template-columns:1fr 1fr}.checks{grid-template-columns:1fr}.ck:nth-child(odd){border-right:0}.hero{grid-template-columns:1fr}.tiles{grid-template-columns:1fr 1fr}.ev{grid-template-columns:36px 1fr}.ev .k,.ev .h{display:none}.hand .cols{grid-template-columns:1fr}.out{flex-direction:column;align-items:stretch}.brand small{display:none}}
+
+/* ---------- stage features: judges' phones and Diwali rush */
+.btn.live{border-color:rgba(43,212,143,.5);color:#9ff5cf}.btn.rushbtn{border-color:rgba(255,194,61,.55);color:#ffe2a0}
+.livechip{position:fixed;right:22px;bottom:22px;z-index:35;display:none;align-items:center;gap:10px;background:rgba(8,13,26,.94);border:1px solid rgba(43,212,143,.5);border-radius:16px;padding:10px 14px;box-shadow:0 18px 40px rgba(0,0,0,.5);cursor:pointer}
+.livechip.on{display:flex}.livechip b{font-size:14px}.livechip small{display:block;color:var(--muted);font-size:12px}
+.pulse{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(43,212,143,.6);animation:lp 1.4s infinite}
+@keyframes lp{70%{box-shadow:0 0 0 12px rgba(43,212,143,0)}100%{box-shadow:0 0 0 0 rgba(43,212,143,0)}}
+.modal{position:fixed;inset:0;z-index:60;background:rgba(3,6,12,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.on{display:flex}
+.mbox{width:min(980px,100%);max-height:92vh;overflow:auto;border:1px solid var(--line2);border-radius:24px;background:linear-gradient(180deg,#111a2e,#0b1222);box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.mhead{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}
+.mhead b{font-size:20px}.mhead small{display:block;color:var(--muted)}
+.jgrid{display:grid;grid-template-columns:320px 1fr;gap:22px;padding:22px}
+.qrbox{background:#fff;border-radius:20px;padding:14px;display:grid;place-items:center;min-height:290px}
+.qrbox svg{width:100%;height:auto}
+.url{font:700 15px var(--mono);word-break:break-all;color:var(--sun2);margin:12px 0 4px}
+.tun{display:flex;gap:8px;margin-top:10px}.tun input{flex:1;min-width:0;background:#0b1222;border:1px solid var(--line2);border-radius:10px;padding:8px 10px;font-size:13px}
+.plist{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.pp{padding:6px 11px;border-radius:99px;background:rgba(43,212,143,.12);border:1px solid rgba(43,212,143,.4);font-weight:700;font-size:13px}
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.score div{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(10,16,32,.6)}
+.score b{display:block;font-size:30px;font-weight:900}.score span{font-size:12px;color:var(--muted)}
+.att{display:flex;flex-direction:column;gap:8px;max-height:300px;overflow:auto}
+.at{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;background:rgba(10,16,32,.55);animation:in .3s both}
+.at b{color:#fff}.at .rd{font:600 12px var(--mono);color:var(--muted);margin-top:3px}.at.ok{border-color:rgba(43,212,143,.5)}.at.no{border-color:rgba(255,92,108,.45)}
+.rush{position:fixed;inset:0;z-index:70;display:none;background:#061634;overflow:auto}
+.rush.on{display:block}
+.rhead{position:relative;padding:26px 30px 22px;background:linear-gradient(90deg,rgba(5,7,13,.96) 0,rgba(5,7,13,.7) 55%,rgba(5,7,13,.35)),url(/assets/diyas.jpg) right center/cover;border-bottom:1px solid var(--line)}
+.rhead h2{margin:0;font-size:34px;letter-spacing:-.5px}.rhead p{margin:6px 0 0;color:#cdd6e6;max-width:780px}
+.rhead .credit{position:absolute;right:12px;bottom:6px;font-size:10px;color:#9aa6bb}
+.rclose{position:absolute;top:18px;right:20px}
+.rbody{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;padding:20px 30px 30px}
+.wall{border:1px solid var(--line);border-radius:20px;background:#070b14;padding:14px;position:relative}
+.wall canvas{width:100%;display:block}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:#c9d4e8}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.big{display:flex;align-items:baseline;gap:14px;margin-bottom:12px}
+.big b{font-size:64px;font-weight:900;letter-spacing:-2px;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#ffd199);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big span{color:var(--muted);font-size:15px}
+.ctr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ctr div{border:1px solid var(--line);border-radius:14px;padding:12px;background:rgba(10,16,32,.7)}
+.ctr b{display:block;font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}.ctr span{font-size:12px;color:var(--muted)}
+.ctr .g b{color:#7ff0c0}.ctr .r b{color:#ff9aa5}.ctr .a b{color:var(--sun2)}.ctr .v b{color:var(--violet)}
+.zero{margin-top:12px;border-radius:16px;padding:14px;border:1px solid rgba(43,212,143,.5);background:linear-gradient(135deg,rgba(43,212,143,.14),rgba(43,212,143,.03))}
+.zero b{font-size:30px;color:#7ff0c0;font-weight:900}.zero span{display:block;font-size:13px;color:#cfeee0}
+.speed{margin-top:12px;font-size:13px;color:var(--muted)}
+.mixt{margin-top:12px;font-size:12px;color:var(--faint)}.mixt summary{padding:6px 0;font-weight:700;color:var(--muted)}
+.pbars{margin-top:14px}.pb{display:grid;grid-template-columns:150px 1fr 70px;gap:8px;align-items:center;font:600 12px var(--mono);color:#c9d4e8;margin:5px 0}
+.pb div{height:8px;border-radius:5px;background:var(--line)}.pb div i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--sun),var(--sun2));transition:width .4s}
+@media(max-width:900px){.jgrid,.rbody{grid-template-columns:1fr}.big b{font-size:44px}}
+
+/* =====================================================================
+   v3.7 light theme in the Paytm palette (navy #002E6E, cyan #00B9F1).
+   Light stage for the product, navy for the "brain", dark only for
+   hardware (the Soundbox) and the night time Diwali rush.
+   ===================================================================== */
+:root{
+  --navy:#002E6E;--navy2:#0A3F8C;--cyan:#00B9F1;--cyan2:#0091D0;--cyanbg:#E6F7FE;
+  --bg:#F2F6FB;--bg2:#E9F0F8;--panel:#FFFFFF;--panel2:#F5F8FC;--line:#E1E8F2;--line2:#CFDAE8;
+  --text:#0B1F44;--muted:#55678A;--faint:#8A99B5;
+  --sun:#00B9F1;--sun2:#0086C3;--sunbg:#E6F7FE;
+  --ok:#0F9D58;--okbg:#E7F6EE;--bad:#E5484D;--badbg:#FDECEC;
+  --info:#2563EB;--violet:#6D4AFF;--violetbg:#EFEBFF;--warn:#D97706;--warnbg:#FFF4E0;
+  --shadow:0 1px 2px rgba(0,46,110,.06),0 8px 28px rgba(0,46,110,.07);
+}
+/* dark token islands */
+.pipe,.rush,.cap,.dev,.livechip{
+  --panel:#0F2A5C;--panel2:#123366;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.2);
+  --text:#FFFFFF;--muted:#B7C8E6;--faint:#86A0CC;--sun:#00B9F1;--sun2:#5CD6FF;--sunbg:rgba(0,185,241,.16);
+  --ok:#2BD48F;--okbg:rgba(43,212,143,.14);--bad:#FF6B76;--badbg:rgba(255,107,118,.14);--violet:#B3A4FF;--violetbg:rgba(179,164,255,.15);
+}
+.rush{--panel:#0B1F48;--panel2:#0F2A5C;--line:#1B3A70;--line2:#24497F;--muted:#B7C8E6;--faint:#8FA6CF;--sun:#00B9F1;--sun2:#5CD6FF;--sunbg:rgba(0,185,241,.12)}
+
+body{background:linear-gradient(180deg,#E3F3FD 0,#F2F6FB 340px),var(--bg);color:var(--text)}
+::-webkit-scrollbar-thumb{background:#C5D3E6}
+
+/* top bar */
+.top{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);box-shadow:0 2px 14px rgba(0,46,110,.06)}
+.top:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--cyan))}
+.mark{background:linear-gradient(135deg,var(--navy),var(--navy2) 45%,var(--cyan));color:#fff;box-shadow:0 6px 18px rgba(0,46,110,.28);position:relative}
+.mark:after{content:"";position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 2px #fff}
+.brand b{color:var(--navy)}
+.brand b em{font-style:normal;color:var(--cyan)}
+.sc{background:#fff;border-color:var(--line);box-shadow:0 1px 2px rgba(0,46,110,.05)}
+.sc b{color:var(--navy)}
+.sc:hover{border-color:var(--cyan)}
+.sc.on{border-color:var(--cyan);background:linear-gradient(180deg,#E6F7FE,#fff);box-shadow:0 0 0 3px rgba(0,185,241,.18)}
+.btn{background:#fff;border-color:var(--line2);color:var(--navy)}
+.btn:hover{border-color:var(--cyan);color:var(--cyan2)}
+.btn.play{background:linear-gradient(135deg,var(--cyan),#0096DB);color:#fff;box-shadow:0 8px 22px rgba(0,185,241,.35)}
+.btn.play:hover{color:#fff;filter:brightness(1.05)}
+.btn.live{border-color:rgba(15,157,88,.45);color:#0B7A45;background:#F1FBF5}
+.btn.rushbtn{border-color:rgba(217,119,6,.45);color:#B45309;background:#FFF8EB}
+.chip{background:#fff}.chip.bad{border-color:#F5B5B8;color:#B42318}.chip.warn{border-color:#F4D08A;color:#92400E}
+.pop{background:#fff;box-shadow:0 24px 60px rgba(0,46,110,.18)}
+.pop select{background:var(--panel2)}
+
+/* pipeline: navy "brain" strip */
+.pipe{background:radial-gradient(600px 200px at 85% -40%,rgba(0,185,241,.35),transparent 70%),linear-gradient(135deg,#002E6E,#003C8C 60%,#004FA8);border:0;box-shadow:0 18px 40px rgba(0,46,110,.25);color:var(--text)}
+.pipe h3 span[style]{color:#86A0CC!important}
+.node.done .dot{border-color:rgba(43,212,143,.6)}
+.node.done .c{color:#A7F0CF}
+.dot{background:rgba(255,255,255,.08)}
+.fill{box-shadow:0 0 14px rgba(0,185,241,.7)}
+.comet{box-shadow:0 0 0 4px rgba(0,185,241,.35),0 0 24px var(--cyan)}
+@keyframes glow{50%{box-shadow:0 0 0 7px rgba(0,185,241,.15),0 0 30px rgba(0,185,241,.55)}}
+
+/* stage labels */
+.lbl{color:var(--navy);opacity:.75}
+
+/* customer phone */
+.phone{background:linear-gradient(145deg,#1B2B4B,#0B1630);box-shadow:0 30px 60px rgba(0,46,110,.25),inset 0 0 0 1px rgba(255,255,255,.08)}
+.apph{background:linear-gradient(135deg,var(--navy),#0050A8);border-bottom:0;color:#fff}
+.apph small{color:#BFE9FB}
+.av{background:#fff;color:var(--navy);box-shadow:inset 0 0 0 2px var(--cyan)}
+.sbar{background:linear-gradient(135deg,var(--navy),#0050A8);color:#fff}
+.screen{background:#F3F7FC}
+.m.me{background:var(--navy)}
+.m .meta button{background:var(--cyanbg);color:var(--cyan2)}
+.q:hover{border-color:var(--cyan);color:var(--cyan2)}
+.rb.go{background:var(--cyan);border-color:var(--cyan)}
+
+/* shopkeeper counter */
+.box{background:linear-gradient(180deg,#fff,#F7FAFE);border:1px solid var(--line);box-shadow:var(--shadow);position:relative}
+.counter{display:flex;align-items:flex-end;justify-content:center;gap:14px;margin:0 -16px 14px;padding:18px 12px 0;border-radius:26px 26px 0 0;background:linear-gradient(180deg,#EAF6FD,#fff)}
+.counter:after{content:"";position:absolute}
+.dev{margin:0 0 -1px;width:196px;border-radius:28px 28px 22px 22px;background:linear-gradient(165deg,#24324F,#121B30 65%);border:1px solid #2E3E62;box-shadow:0 22px 34px rgba(0,30,80,.35),inset 0 2px 0 rgba(255,255,255,.08)}
+.dev:before{content:"";position:absolute;left:18px;right:18px;top:7px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.75}
+.grill{background:radial-gradient(#4E6290 2.2px,transparent 2.7px) 0 0/10px 10px,#17223A;height:88px}
+.wave i{background:var(--cyan)}
+.dev.talk .ring{box-shadow:inset 0 0 0 2px rgba(0,185,241,.7)}
+.standee{width:92px;flex:none;background:#fff;border:1px solid var(--line);border-radius:14px 14px 4px 4px;padding:8px 8px 10px;text-align:center;box-shadow:0 12px 24px rgba(0,46,110,.12);position:relative;margin-bottom:0}
+.standee .hd{background:var(--navy);color:#fff;border-radius:8px;font:800 9.5px/1 Inter,sans-serif;letter-spacing:.06em;padding:5px 0}
+.standee .qrp{margin:7px auto 6px;width:66px;height:66px;border-radius:6px;background:
+ linear-gradient(#0B1F44 0 0) 3px 3px/16px 16px no-repeat,linear-gradient(#0B1F44 0 0) 47px 3px/16px 16px no-repeat,linear-gradient(#0B1F44 0 0) 3px 47px/16px 16px no-repeat,
+ repeating-conic-gradient(#0B1F44 0 25%,#fff 0 50%) 0 0/9px 9px;box-shadow:inset 0 0 0 3px #fff;outline:1px solid var(--line)}
+.standee small{display:block;font-size:9.5px;color:var(--muted);font-weight:700;line-height:1.25}
+.standee small b{color:var(--navy);font-size:10.5px}
+.box .chat{height:236px}
+.box .m.bot{background:#fff;border-color:var(--line);color:var(--text);box-shadow:0 1px 2px rgba(0,46,110,.05)}
+.box .m.me{background:linear-gradient(135deg,var(--cyan),#0096DB);color:#fff}
+.box .m .meta{color:var(--faint)}.box .m .meta button{background:var(--cyanbg);color:var(--cyan2)}
+.box .q{background:#fff;border-color:var(--line2);color:var(--navy)}
+.box .comp input{background:#fff;border-color:var(--line2);color:var(--text)}
+.box .rb{background:#fff;border-color:var(--line2);color:var(--navy)}.box .rb.go{background:var(--cyan);border-color:var(--cyan);color:#fff}
+.rail{background:var(--panel2);color:var(--muted)}.rail b{color:var(--navy)}
+.rail.ok{background:linear-gradient(180deg,#E7F6EE,#F6FCF8);border-color:rgba(15,157,88,.35)}
+.rail.bad{background:linear-gradient(180deg,#FDECEC,#FFF8F8);border-color:rgba(229,72,77,.35)}
+
+/* centre */
+.card{background:#fff;border-color:var(--line);box-shadow:var(--shadow)}
+.amt{background:linear-gradient(180deg,var(--navy),#1C5BB8);-webkit-background-clip:text;background-clip:text}
+.verdict.sun{color:var(--cyan2)}.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+.tag{background:var(--panel2);color:var(--navy)}
+.tag.sun{background:var(--cyanbg);border-color:rgba(0,185,241,.45);color:#00699A}
+.tag.ok{background:var(--okbg);border-color:rgba(15,157,88,.35);color:#0B7A45}
+.tag.bad{background:var(--badbg);border-color:rgba(229,72,77,.35);color:#B42318}
+.day.past i{background:linear-gradient(90deg,var(--navy),var(--cyan))}.day.today i{background:var(--cyan);box-shadow:0 0 10px rgba(0,185,241,.6)}
+.day.dl i{border-color:var(--ok)}.day.late i{box-shadow:0 0 8px rgba(229,72,77,.4)}
+.fact{background:var(--panel2)}
+.fact b[style*="ff8d99"]{color:var(--bad)!important}
+.ck i{background:var(--panel2)}
+.ck.y i{color:#fff;box-shadow:0 0 10px rgba(15,157,88,.35)}.ck.n i{color:#fff;box-shadow:0 0 10px rgba(229,72,77,.35)}
+.ck code{color:var(--navy)}
+.ticket.y{background:linear-gradient(135deg,#E7F6EE,#F4FBF7);color:#064E2B;border-color:rgba(15,157,88,.4)}.ticket.y .l{background:rgba(15,157,88,.08)}
+.ticket.n{background:linear-gradient(135deg,#FDECEC,#FFF7F7);color:#7A1C1C;border-color:rgba(229,72,77,.4)}.ticket.n .l{background:rgba(229,72,77,.06)}
+.ticket .l{border-right-color:rgba(0,46,110,.18)}
+.ticket[style]{background:linear-gradient(135deg,#FFF4E0,#FFFBF2)!important;color:#7A4A00!important;border-color:rgba(217,119,6,.4)!important}
+.said mark{background:var(--badbg);color:#B42318}
+.viol{color:#B42318}
+.tester input{background:var(--panel2);color:var(--text)}
+.hand{border-color:rgba(0,185,241,.45);background:linear-gradient(180deg,#E6F7FE,#fff)}
+.hand h4{color:var(--cyan2)}.hand ul{color:var(--text)}.hand .next{background:rgba(0,185,241,.12)}
+
+/* lower */
+.lower{background:#fff;box-shadow:var(--shadow)}
+.tabs button.on{border-bottom-color:var(--cyan);color:var(--navy)}
+.ev{background:var(--panel2)}
+.ev .a.tatkal{background:var(--cyanbg);color:#00699A}.ev .a.guard{background:var(--okbg);color:#0B7A45}.ev .a.rail{background:#E8EFFF;color:#1D4ED8}
+.ev .a.merchant,.ev .a.customer{background:#EEF2F8;color:var(--navy)}.ev .a.rule_engine,.ev .a.engine{background:var(--warnbg);color:#92400E}
+.ev .k{color:var(--navy)}.ev .k.bad{color:#B42318}.ev .k.good{color:#0B7A45}
+.tile{background:var(--panel2)}.tile.ok b{color:var(--ok)}.tile.sun b{color:var(--cyan2)}.tile.sun:before{background:var(--cyan)}
+details{background:var(--panel2)}summary .v{color:var(--navy)}
+.err{color:var(--warn)}
+
+/* overlays */
+.toast{background:#fff;box-shadow:0 18px 40px rgba(0,46,110,.18)}
+.modal{background:rgba(0,30,70,.45)}
+.mbox{background:#fff;box-shadow:0 40px 100px rgba(0,46,110,.35)}
+.url{color:var(--cyan2)}
+.tun input{background:var(--panel2);color:var(--text)}
+.pp{background:var(--okbg);border-color:rgba(15,157,88,.35);color:#0B7A45}
+.score div,.at{background:var(--panel2)}.at b{color:var(--navy)}
+#scS{color:var(--ok)!important}
+.cap{background:linear-gradient(135deg,rgba(0,46,110,.97),rgba(0,64,140,.97));color:#fff}
+.cap .bar i{background:var(--cyan)}
+.livechip{background:linear-gradient(135deg,#002E6E,#004FA8);color:#fff}
+.rush{color:#fff}.rush .btn:not(.play){background:var(--panel2);color:#fff;border-color:var(--line2)}
+.counter{border-bottom:1px solid var(--line);margin-bottom:12px;box-shadow:0 10px 12px -10px rgba(0,46,110,.18)}
+.ticket .r{padding-right:150px}
+@media(max-width:1400px){.ticket .r{padding-right:16px}.stamp{display:none}}
+
+
+/* ===== v3.8: contrast (WCAG AA), focus, offline fonts, honest badges ===== */
+:root{--faint:#5F6E8C;--sun2:#0077B0;--ok:#0E8A4E;--bad:#C93A3F;--warn:#B45309}
+body,button,select,input{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari",Arial,sans-serif}
+:root{--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+:focus-visible{outline:3px solid #0077B0;outline-offset:2px;border-radius:10px}
+.pipe :focus-visible,.rush :focus-visible,.cap :focus-visible{outline-color:#5CD6FF}
+.btn.play,.btn.play:hover{color:#002E6E}
+.box .m.me{color:#002E6E}
+.rb.go,.box .rb.go{color:#002E6E}
+.btn.live{color:#0B7A45}.chip{color:var(--text)}
+.skbadge{margin-right:8px;display:inline-flex;align-items:center;gap:6px;background:#C93A3F;color:#fff;font-weight:800;font-size:12.5px;padding:7px 11px;border-radius:10px;box-shadow:0 0 0 3px rgba(201,58,63,.2);letter-spacing:.02em}
+.skbadge[hidden]{display:none}
+.pipe h3{gap:14px;align-items:center}.pipe h3>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pipe h3>span:last-child{flex:none;white-space:nowrap}
+@media(max-width:1400px){#pipeNote{display:none}}
+.mockline{display:inline-block;margin-right:10px;padding:3px 9px;border-radius:99px;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11.5px;font-weight:700}
+/* Rush: keep the festive photo only here, tinted navy to match */
+.rush{background:#061634}
+.rhead{background:linear-gradient(90deg,rgba(0,30,80,.97) 0,rgba(0,46,110,.82) 55%,rgba(0,46,110,.45)),url(/assets/diyas.jpg) right center/cover}
+.wall{background:#04102A}.rush .ctr div,.rush .zero{background:rgba(255,255,255,.04)}
+.rush .btn.play{color:#002E6E}
+
+/* voice control: appears while Tatkal is speaking */
+.vctl{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:85;display:flex;align-items:center;gap:10px;padding:8px 10px 8px 14px;border-radius:99px;background:#fff;border:1px solid var(--line2);box-shadow:0 18px 40px rgba(0,46,110,.22);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .25s}
+.vctl.on{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.vctl .vtx{font-weight:700;font-size:13.5px;color:var(--navy)}
+.vctl .vdot{width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 0 rgba(0,185,241,.6);animation:lp 1.2s infinite}
+.vctl.paused .vdot{background:var(--warn);animation:none}
+.cap.on~.vctl.on,body:has(.cap.on) .vctl.on{bottom:118px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand"><div class="mark">T</div><div class="nm"><b>Tat<em>kal</em></b><small>UPI dispute teammate · for the Paytm ecosystem</small></div></div>
+  <div class="scen" id="scen"></div>
+  <div class="chips">
+    <button class="btn sm" title="How to use (?)" onclick="$('guide').classList.add('on')" style="font-weight:900;min-width:38px">?</button>
+    <button class="btn live" title="Judges' phones (J)" onclick="openJudges()">📱<span class="bl"> Judges</span></button>
+    <button class="btn rushbtn" title="Diwali rush (R)" onclick="openRush()">🪔<span class="bl"> Rush</span></button>
+    <button class="btn play" id="playBtn" title="Play demo (P)" onclick="autoplay()">▶ Play demo</button>
+    <div class="menu" id="menu"><button class="btn sm" onclick="$('menu').classList.toggle('open')">Controls ▾</button>
+      <div class="pop">
+        <h4>Status</h4><div class="chips" style="margin-bottom:6px"><span class="chip" id="sReader"><i></i><span>reader</span></span><span class="chip" id="sWords"><i></i><span>words</span></span><span class="chip" id="sRail"><i></i><span>rails</span></span></div>
+        <h4>Who writes the words</h4>
+        <select id="mode" onchange="setMode()"><option value="templates">Engine templates (default)</option><option value="live">Sarvam 105B rephrasing (experimental)</option><option value="simulated">Simulated risky LLM (guard demo)</option></select>
+        <h4 style="margin-top:12px">Rail faults</h4>
+        <label><input type="checkbox" id="drop" onchange="setDrop()"><span>Rail drops acknowledgements<small>NPCI accepts but never confirms. Tatkal must not say done.</small></span></label>
+        <h4>Voice</h4>
+        <label><input type="checkbox" id="auto" checked><span>Speak every new message<small>Bulbul v4, Hindi · on by default</small></span></label>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn sm" onclick="resetAll()">Reset demo</button><button class="btn sm" onclick="$('menu').classList.remove('open')">Close</button></div>
+      </div></div>
+  </div>
+</div>
+
+<section class="pipe">
+  <h3><span style="color:var(--faint);letter-spacing:.14em">What Tatkal is doing <b id="pipeTitle" style="color:var(--sun2);letter-spacing:0;text-transform:none;font-size:13px;margin-left:10px"></b></span><span><span class="skbadge" id="skBadge" role="status" hidden>⚠ SINGLE KEY DEMO: not production</span> <span class="mockline" title="PSP, acquiring ledger and UDIR rails are mocked">Demo · mock rails · no money moves</span> <span id="pipeNote">Pick a case to start, or press 1 to 8</span></span></h3>
+  <div class="nodes" id="nodes"><div class="track"><div class="fill" id="fill"></div><div class="comet" id="comet"></div></div></div>
+</section>
+
+<div class="stage">
+  <section>
+    <div class="lbl" id="custLbl">Customer <span></span></div>
+    <div class="phone"><div class="screen"><div class="notch"></div>
+      <div class="sbar"><span id="clock">18:31</span><span>●●●● 5G ▮</span></div>
+      <div class="apph"><div class="av">T</div><div><b>Tatkal</b><small id="custApp">in the customer's UPI app</small></div></div>
+      <div class="chat" id="cust"></div>
+      <div class="qr"><button class="q" onclick="cust('Paisa kab tak wapas aayega?')">Kab tak?</button><button class="q" onclick="cust('Kal tak pakka aa jayega na?')">Kal tak pakka?</button><button class="q" onclick="cust('Mujhe kisi insaan se baat karni hai')">Insaan se baat</button></div>
+      <div class="comp"><input id="custIn" placeholder="Hindi, Hinglish or English" onkeydown="if(event.key==='Enter')cust()"><button class="rb" id="custMic" onclick="mic('customer')" title="Speak">🎙</button><button class="rb go" onclick="cust()" title="Send">➤</button></div>
+    </div></div>
+  </section>
+
+  <section class="center" id="center">
+    <div class="card" id="caseCard"><div class="empty"><b>A stuck payment, handled end to end</b><p>Tatkal reads the ledger, applies the RBI and NPCI rules in code, asks the shopkeeper one clear question and only replies to NPCI when every check passes.</p><button class="btn play" onclick="autoplay()">▶ Play the 2 minute demo</button></div></div>
+    <div class="card gate" id="gateCard" style="display:none"></div>
+    <div class="card hand" id="ticket" style="display:none"></div>
+    <div class="card words" id="wordsCard" style="display:none"><div class="mini" style="margin-bottom:10px">Every sentence is checked before it is spoken</div><div id="guard"></div>
+      <div class="tester"><input id="draftIn" value="Chinta mat kijiye, 24 ghante mein paisa wapas aa jayega." onkeydown="if(event.key==='Enter')tryDraft()"><button class="btn" onclick="tryDraft()">Test a line</button></div></div>
+  </section>
+
+  <section>
+    <div class="lbl">Shopkeeper <span id="shopName"></span></div>
+    <div class="box">
+      <div class="counter"><div class="dev" id="dev"><div class="grill"><div class="ring"></div><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="lcd" id="lcd">READY</div><div class="leds"><i id="led1"></i><i id="led2"></i><i id="led3"></i></div></div><div class="standee" aria-hidden="true"><div class="hd">SCAN &amp; PAY</div><div class="qrp"></div><small>UPI<br><b id="standeeShop">Your shop</b></small></div></div>
+      <div class="chat" id="merch"></div>
+      <div class="qr" id="mchips"></div>
+      <div class="comp"><input id="merchIn" placeholder="Shopkeeper's reply" onkeydown="if(event.key==='Enter')merch()"><button class="rb" id="merchMic" onclick="mic('merchant')" title="Speak">🎙</button><button class="rb go" onclick="merch()" title="Send">➤</button></div>
+      <div class="rail" id="rail"><b>UDIR</b>No action yet</div>
+    </div>
+  </section>
+</div>
+
+<section class="lower">
+  <div class="tabs"><button class="on" id="tabA" onclick="tab('a')">Live audit chain</button><button id="tabE" onclick="tab('e')">Evaluation</button></div>
+  <div class="pane" id="paneA">
+    <div class="cbar"><span class="cs ok" id="chainV">checking…</span><button class="btn sm" onclick="refreshAudit()">Verify chain</button><button class="btn sm" onclick="tamper()">Simulate an insider edit</button><button class="btn sm" onclick="anchor()">Sign chain head</button>
+      <span class="cnote" id="chainNote">Every ruling, message, reading, gate decision, warrant and rail call is a block in a SHA256 hash chain. Editing any past block breaks every hash after it.</span></div>
+    <div class="feed" id="audit"></div>
+  </div>
+  <div class="pane" id="paneE" style="display:none"></div>
+</section>
+
+
+<div class="livechip" id="livechip" onclick="openJudges()"><span class="pulse"></span><div><b id="lcTitle">LIVE</b><small id="lcSub">phones connected</small></div></div>
+
+<div class="modal" id="judges" onclick="if(event.target===this)closeJudges()"><div class="mbox">
+  <div class="mhead"><div><b>📱 Aap dukaandar hain</b><small>Judges scan this. Their phone becomes the Soundbox (or the customer's app) for the case on screen.</small></div><button class="btn sm" onclick="closeJudges()">Close</button></div>
+  <div class="jgrid">
+    <div><div class="qrbox" id="qr">Loading…</div><div class="url" id="jurl"></div><div class="tiny" id="micnote" style="font-size:12px;color:var(--muted)"></div>
+      <button class="btn play" id="tunBtn" style="width:100%;margin-top:10px" onclick="startTunnel()">🔒 Start secure link (phone voice)</button><div class="tiny" id="tunNote" style="font-size:12px;color:var(--muted);margin-top:6px"></div>
+      <div class="tun"><input id="tunnel" placeholder="Or paste https://…trycloudflare.com"><button class="btn sm" onclick="setTunnel()">Use</button></div></div>
+    <div>
+      <div class="mini">On the line</div><div class="plist" id="plist"><span style="color:var(--muted)">Nobody yet. Scan the code.</span></div>
+      <div class="score"><div><b id="scA">0</b><span>replies from judges' phones</span></div><div><b id="scS" style="color:#7ff0c0">0</b><span>sent to NPCI (every check green)</span></div><div><b id="scH" style="color:var(--sun2)">0</b><span>held back or re asked</span></div></div>
+      <div class="mini" style="margin-bottom:8px">Latest attempts</div><div class="att" id="att"></div>
+    </div>
+  </div>
+</div></div>
+
+<div class="rush" id="rush">
+  <div class="rhead"><h2>🪔 Diwali rush</h2><p>On Dhanteras, 18 October 2025, UPI carried <b>75.4 crore payments worth ₹1.02 lakh crore in one day</b>, its highest ever (NPCI data via Business Today). Here, <b id="rN">1,00,000</b> synthetic stuck payments go through the <b>same rule engine, templates and guard</b> the console uses (not full PSP, UDIR or voice sessions). Every diya is a batch of cases.</p>
+    <span class="credit">Photo: siddarth varanasi, CC BY 2.0, via Wikimedia Commons</span>
+    <div class="rclose"><button class="btn play" id="rGo" onclick="startRush()">▶ Run 1 lakh cases</button> <button class="btn sm" onclick="closeRush()">Close</button></div></div>
+  <div class="rbody">
+    <div class="wall"><canvas id="cv" width="1200" height="520"></canvas>
+      <div class="legend"><span><i style="background:#2bd48f"></i>Nothing stuck: both sides told</span><span><i style="background:#00B9F1"></i>Complaint raised, RBI clock running</span><span><i style="background:#a493ff"></i>Shopkeeper asked one question</span><span><i style="background:#ff5c6c"></i>Sent to a person</span></div>
+      <div class="pbars" id="pbars"></div></div>
+    <div>
+      <div class="big"><b id="rDone">0</b><span>cases ruled</span></div>
+      <div class="ctr">
+        <div class="a"><b id="rC">0</b><span>UDIR complaints raised</span></div>
+        <div class="a"><b id="rH">0</b><span>shopkeepers told to hold goods</span></div>
+        <div class="v"><b id="rQ">0</b><span>shopkeepers asked one question</span></div>
+        <div class="r"><b id="rP">0</b><span>handed to a person with a packet</span></div>
+        <div class="r"><b id="rL">0</b><span>RBI deadline breaches caught</span></div>
+        <div class="r"><b id="rM">₹0</b><span>compensation owed, flagged</span></div>
+      </div>
+      <div class="zero"><b id="rZ">0</b> invented dates, amounts or promises spoken<span id="rZs">Every customer and shopkeeper message checked by the guard.</span></div>
+      <div class="speed" id="rS"></div>
+      <details class="mixt"><summary>Synthetic mix (our assumption, not production data)</summary><div id="mix"></div></details>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="guide" onclick="if(event.target===this)this.classList.remove('on')"><div class="mbox" style="width:min(900px,100%)">
+  <div class="mhead"><div><b>How to use Tatkal</b><small>Everything on this screen, in the order you would show it</small></div><button class="btn sm" onclick="$('guide').classList.remove('on')">Close</button></div>
+  <div style="padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:22px;font-size:14px;line-height:1.5">
+   <div><div class="mini">The screen</div><ul style="padding-left:18px;margin:8px 0">
+    <li><b>Top strip</b>: the eight cases (S1 to S8). Click one, or press its number.</li>
+    <li><b>What Tatkal is doing</b>: each step lights up as the agent works.</li>
+    <li><b>Left phone</b>: the customer. <b>Right box</b>: the shopkeeper's Soundbox.</li>
+    <li><b>Middle</b>: the ruling, the RBI clock and the action gate. Nothing is sent to NPCI until every check is green.</li>
+    <li><b>Bottom</b>: the audit chain and the Evaluation tab.</li></ul>
+    <div class="mini" style="margin-top:12px">Talking</div><ul style="padding-left:18px;margin:8px 0">
+    <li>Tap a quick reply, type, or press 🎙 and speak (tap again to stop).</li>
+    <li>A <b>spoken</b> yes is read back; answer "haan, confirm".</li>
+    <li>▶ play on any message speaks it with Bulbul. The first sentence starts while the rest load.</li></ul></div>
+   <div><div class="mini">Showing it</div><ol style="padding-left:18px;margin:8px 0">
+    <li><b>▶ Play demo</b>: hands free, captioned, about 2 minutes.</li>
+    <li>Or by hand: S4 → "Haan… lekin" → "Haan, de diya" → reopen S4 → "Nahi diya" → "Refund kar diya" → S8 → S7.</li>
+    <li><b>📱 Judges</b>: QR code; their phone becomes the Soundbox.</li>
+    <li><b>🪔 Rush</b>: 1 lakh synthetic cases through the real engine.</li>
+    <li>Audit tab → <b>Simulate an insider edit</b>.</li></ol>
+    <div class="mini" style="margin-top:12px">Keys</div>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:8px;font-size:13.5px">
+     <code>1 to 8</code><span>open a case</span><code>P</code><span>play or stop the demo</span><code>K</code><span>pause or resume the voice</span><code>J</code><span>judges' phones</span><code>R</code><span>Diwali rush</span><code>A</code><span>auto speak on or off</span><code>?</code><span>this guide</span><code>Esc</code><span>close any panel</span></div>
+    <div class="mini" style="margin-top:12px">Controls ▾</div><p style="margin:6px 0;color:var(--muted)">Status of the second reader, who writes the words, rail faults ("drops acknowledgements"), auto speak and Reset.</p></div>
+  </div></div></div><div class="cap" id="cap"><span class="n" id="capN">1/12</span><span class="x" id="capX"></span><button class="btn sm" onclick="stopPlay()">Stop</button><div class="bar"><i id="capBar"></i></div></div>
+<div class="toast" id="toast"></div>
+<div class="vctl" id="vctl" role="group" aria-label="Voice playback"><span class="vdot"></span><span class="vtx" id="vtx">Tatkal is speaking</span>
+  <button class="btn sm" id="vPause" onclick="togglePause()" title="Pause or resume (K)">⏸ Pause</button><button class="btn sm" onclick="stopVoice()" title="Stop (Esc)">■ Stop</button></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const inr=n=>'₹'+Number(n||0).toLocaleString('en-IN');
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+let SC=[],cur=null,DEMO_TODAY='2026-10-31',HEALTH={},spoken=0,lastGuardLen=0,rec=null,lastGateKey='',PLAY=false,brokenAt=null,custCount=0,merchCount=0;
+function toast(t,ms=4200){const e=$('toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',ms)}
+let ADMIN='';try{const u=new URLSearchParams(location.search).get('admin');if(u){sessionStorage.setItem('tatkal_admin',u);history.replaceState(null,'',location.pathname)}ADMIN=sessionStorage.getItem('tatkal_admin')||''}catch(e){}
+async function api(p,o={}){const h={'Content-Type':'application/json'};if(ADMIN)h['X-Demo-Admin']=ADMIN;const r=await fetch(p,{headers:h,...o});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.detail||r.statusText);return j}
+function fmt(iso,yr){if(!iso)return 'none';const d=new Date(iso+'T00:00:00Z');return d.toLocaleDateString('en-IN',yr?{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}:{day:'numeric',month:'short',timeZone:'UTC'})}
+document.addEventListener('click',e=>{if(!$('menu').contains(e.target))$('menu').classList.remove('open')});
+setInterval(()=>{const d=new Date();$('clock').textContent=d.toTimeString().slice(0,5)},10000);
+
+const NODES=[['📒','Ledger read'],['⚖️','Rule engine'],['🛰️','NPCI UDIR'],['🔊','Ask shopkeeper'],['👂','Two readers'],['🔐','Gate + warrant'],['✅','Outcome']];
+$('nodes').insertAdjacentHTML('beforeend',NODES.map(([i,t],k)=>`<div class="node" id="n${k}"><div class="dot">${i}</div><div class="t">${t}</div><div class="c" id="nc${k}">waiting</div></div>`).join(''));
+
+async function init(){
+  SC=await api('/scenarios');
+  $('scen').innerHTML=SC.map((s,i)=>`<button class="sc" id="sc_${s.txn_id}" title="${esc(s.id+' · '+s.title+'  (key '+(i+1)+')')}" onclick="openCase('${s.txn_id}')"><b>${s.id} · ${esc((s.title.match(/₹[\d,]+/)||[''])[0])}</b><span>${esc(s.tag)}</span></button>`).join('');
+  await health();refreshAudit();
+}
+async function health(){
+  const h=HEALTH=await api('/health');$('mode').value=h.mode;$('drop').checked=h.drop_ack;DEMO_TODAY=h.demo_today;
+  const r=$('sReader');
+  if(h.second_reader==='sarvam-105b'){r.className='chip ok';r.lastChild.textContent='Sarvam 105B second reader live'}
+  else if(h.second_reader==='single key override'){r.className='chip bad';r.lastChild.textContent='SINGLE KEY DEMO: not production'}
+  else{r.className='chip warn';r.lastChild.textContent='No second reader: every yes goes to a person'}
+  $('skBadge').hidden=h.second_reader!=='single key override';
+  const w=$('sWords');w.className='chip '+(h.mode==='templates'?'ok':h.mode==='live'?'warn':'bad');w.lastChild.textContent=h.mode==='templates'?'Words: engine templates':h.mode==='live'?'Words: Sarvam rephrasing':'Words: simulated risky LLM';
+  const rl=$('sRail');rl.className='chip '+(h.drop_ack?'bad':'ok');rl.lastChild.textContent=h.drop_ack?'Mock rails dropping acks':'Mock rails healthy';
+}
+async function setMode(){try{await api('/mode',{method:'POST',body:JSON.stringify({mode:$('mode').value})})}catch(e){toast(e.message);$('mode').value='templates'}health()}
+async function setDrop(){await api('/rails/drop_ack',{method:'POST',body:JSON.stringify({on:$('drop').checked})});health()}
+async function resetAll(){await api('/reset',{method:'POST'});location.reload()}
+async function openCase(id){id=id||cur;if(!id)return;try{const c=await api('/cases/open',{method:'POST',body:JSON.stringify({txn_id:id,fresh:true})});cur=c.txn_id;spoken=0;lastGuardLen=0;lastGateKey='';custCount=0;merchCount=0;brokenAt=null;
+  document.querySelectorAll('.sc').forEach(b=>b.classList.toggle('on',b.id==='sc_'+id));
+  for(let k=0;k<7;k++){$('n'+k).className='node';$('nc'+k).textContent='waiting'}$('fill').style.width='0';$('comet').style.left='0';
+  render(c,true)}catch(e){toast(e.message)}}
+function pending(id,t){const el=$(id);el.insertAdjacentHTML('beforeend',`<div class="m me">${esc(t)}</div><div class="typing"><i></i><i></i><i></i></div>`);el.scrollTop=1e6}
+async function cust(t){t=t||$('custIn').value.trim();if(!t)return;if(!cur)return toast('Open a case first');$('custIn').value='';pending('cust',t);try{render(await api(`/cases/${cur}/customer`,{method:'POST',body:JSON.stringify({text:t})}))}catch(e){toast(e.message)}}
+async function merch(t,src){t=t||$('merchIn').value.trim();if(!t)return;if(!cur)return toast('Open a case first');$('merchIn').value='';
+  $('dev').classList.add('listen');pending('merch',t);$('n4').className='node active';$('nc4').textContent='reading with both readers…';
+  try{render(await api(`/cases/${cur}/merchant`,{method:'POST',body:JSON.stringify({text:t,source:src==='voice'?'voice':'text'})}))}catch(e){toast(e.message)}}
+async function recheck(){if(!cur)return;try{render(await api(`/cases/${cur}/recheck`,{method:'POST'}))}catch(e){toast(e.message)}}
+async function tryDraft(){if(!cur)return toast('Open a case first');const r=await api(`/cases/${cur}/draft`,{method:'POST',body:JSON.stringify({text:$('draftIn').value,audience:'customer'})});showGuard({draft:r.draft,verdict:r.verdict,final:r.final,blocked:!r.verdict.ok,source:'typed by you'});refreshAudit()}
+
+const HEADS={P2M_PENDING:['Debited, shop not credited yet','sun'],PAYEE_CREDITED:['Shop was paid. Customer never got confirmation','ok'],SOUNDBOX_MISSED:['Shop was paid. Only the Soundbox missed it','ok'],P2M_FAILED_DEBITED:['Failed after debit: bank must reverse','sun'],P2M_REVERSED:['Already reversed to the customer','ok'],DUPLICATE:['Charged twice for one purchase','sun'],GOODS_DISPUTE:['Paid, but goods disputed','bad'],NO_DEBIT:['Nothing was debited','ok'],P2P_PENDING:['Transfer pending','sun'],P2P_FAILED_DEBITED:['Transfer failed after debit','sun'],P2P_CREDITED:['Transfer reached the receiver','ok'],HUMAN_REVIEW:['Data contradicts itself: a person decides','bad']};
+const QCH={ask_goods:[['Haan, saamaan de diya','Haan, de diya'],['Nahi, saamaan nahi diya','Nahi diya'],['Haan de diya, lekin usne kuch nahi liya','Haan… lekin'],['Refund kar diya maine','Refund kar diya']],
+ ask_refund:[['Haan, refund kar do','Haan, refund kar do'],['Nahi, refund mat karo','Mat karo'],['Refund already kar diya','Already kar diya'],['Shayad, pata nahi','Pata nahi']]};
+
+function render(c,fresh){
+  const r=c.ruling||{},t=c.txn||{};
+  const app=t.payer_app||'Paytm';
+  $('custLbl').innerHTML=`Customer <span>${esc(t.customer_name||'')} · ${esc(app)} app</span>`;
+  $('custApp').textContent=app==='Paytm'?'inside the Paytm app':`status reaches ${app} through NPCI UDIR`;
+  $('shopName').textContent=t.merchant_name||'';$('standeeShop').textContent=(t.merchant_name||'Your shop').split(' ').slice(0,2).join(' ');
+  chat('cust',c.transcript.filter(x=>x.who==='customer'||x.to==='customer'||x.who==='system'),'customer');
+  chat('merch',c.transcript.filter(x=>x.who==='merchant'||x.to==='merchant'),'merchant');
+  hero(c,r,t);gate(c);hand(c);
+  $('wordsCard').style.display='';
+  if(c.guard_log.length>lastGuardLen){const g=[...c.guard_log].reverse().find(x=>x.source!=='template')||c.guard_log[c.guard_log.length-1];showGuard(g);lastGuardLen=c.guard_log.length}
+  soundbox(c,r,t);qchips(c);pipeline(c,r,t,fresh);
+  const bot=c.transcript.filter(x=>x.who==='tatkal');if($('auto').checked&&bot.length>spoken){spoken=bot.length;const b=bot[bot.length-1];sayText(b.text,b.to==='merchant')}else spoken=bot.length;
+  refreshAudit();
+}
+function chat(id,list,side){
+  const el=$(id),prev=id==='cust'?custCount:merchCount;
+  const html=list.map((x,i)=>{const anim=i>=prev?'':' style="animation:none"';
+    if(x.who==='system')return `<div class="m sys"${anim}>${esc(x.text)}</div>`;
+    if(x.who===side)return `<div class="m me"${anim}>${esc(x.text)}</div>`;
+    return `<div class="m bot"${anim}>${esc(x.text)}<div class="meta"><span>Tatkal</span><button onclick="sayText(this.dataset.t,${side==='merchant'})" data-t="${esc(x.text)}">▶ play</button></div></div>`}).join('');
+  el.innerHTML=html||'<div class="m sys" style="animation:none">No messages yet</div>';el.scrollTop=1e6;
+  if(id==='cust')custCount=list.length;else merchCount=list.length}
+function hero(c,r,t){
+  const [head,tone]=HEADS[r.path]||[r.path,'sun'];
+  const tags=[`<span class="tag">${esc(c.txn_id)}</span>`,`<span class="tag sun">${esc(r.path)}</span>`];
+  if(r.udir_code)tags.push(`<span class="tag sun">NPCI ${r.udir_code}</span>`);
+  if(r.rbi_row)tags.push(`<span class="tag sun">RBI ${r.rbi_row} · T+${r.tat_days}</span>`);
+  tags.push(`<span class="tag ${t.merchant_credited?'ok':'bad'}">ledger: shop ${t.merchant_credited?'credited':'not credited'}</span>`);
+  tags.push(r.escalate?`<span class="tag bad">with a person</span>`:`<span class="tag ok">autonomous</span>`);
+  let clock='';
+  if(r.deadline&&r.tat_days){const T=new Date(t.txn_date+'T00:00:00Z'),N=new Date(DEMO_TODAY+'T00:00:00Z');const span=Math.max(r.tat_days+2,Math.round((N-T)/864e5)+1);
+    const cells=[];for(let k=0;k<=span;k++){const d=new Date(T.getTime()+k*864e5),iso=d.toISOString().slice(0,10);const isToday=iso===DEMO_TODAY,isDl=k===r.tat_days,past=d<N,late=k>r.tat_days&&d<=N;
+      cells.push(`<div class="day ${late?'late':isToday?'today':isDl?'dl':past?'past':''}"><i></i><b>${k===0?'T':'T+'+k}</b>${fmt(iso)}${late?'<br><span style="color:var(--bad)">₹100</span>':isDl?'<br><span style="color:var(--ok)">deadline</span>':isToday?'<br><span style="color:var(--sun2)">today</span>':''}</div>`)}
+    clock=`<div class="clock"><div class="mini" style="margin-bottom:8px">RBI clock · calendar days from payment</div><div class="days" style="grid-template-columns:repeat(${span+1},1fr)">${cells.join('')}</div></div>`}
+  const goods=r.merchant_should_hand_over_goods===true?'Yes':r.merchant_should_hand_over_goods===false?'Not yet':'A person decides';
+  $('caseCard').innerHTML=`<div class="hero"><div class="amt">${inr(t.amount_inr)}</div><div><div class="who"><b>${esc(t.customer_name)}</b> paid <b>${esc(t.merchant_name)}</b> · ${esc(t.kind)} · ${esc(t.status)} · via ${esc(t.payer_app)}</div><div class="verdict ${tone}">${esc(head)}</div></div></div>
+    <div class="tags">${tags.join('')}</div>${clock}
+    <div class="facts"><div class="fact wide"><span>Who acts</span><b>${esc(r.who_acts)}</b></div><div class="fact"><span>At risk</span><b>${inr(r.money_at_risk_inr)}</b></div><div class="fact"><span>Compensation</span><b style="color:${r.compensation_due_inr?'#ff8d99':'inherit'}">${inr(r.compensation_due_inr)}</b></div><div class="fact"><span>Hand over goods</span><b>${goods}</b></div></div>
+    <div class="why">${esc((r.reasons||[]).concat(r.escalate_reasons||[]).join(' · '))}</div>`}
+function pipeline(c,r,t,fresh){
+  const s=c.state,g=c.last_gate,ask=c.incoming||r.udir_code==='U023',ackd=!!(c.ack&&c.ack.udir_complaint);
+  const st=[],cap=[];
+  st[0]='done';cap[0]=`debited ${t.payer_debited?'✓':'✕'} · shop ${t.merchant_credited?'credited ✓':'not credited ✕'}`;
+  st[1]=r.escalate&&!c.complaint?'blocked':'done';cap[1]=`${r.path}${r.udir_code?' · '+r.udir_code:''}${r.tat_days?' · T+'+r.tat_days:''}`;
+  if(!c.complaint){st[2]='skip';cap[2]='no complaint needed'}
+  else if(ackd){st[2]='done';cap[2]=`ack ✓ ${c.complaint.complaint_id.replace('UDIR-','')}`}
+  else if(s==='AWAITING_ACK'){st[2]='active';cap[2]='sent · waiting for ack'}
+  else{st[2]='blocked';cap[2]='never acknowledged'}
+  if(!ask){st[3]='skip';cap[3]='not a payee case'}
+  else if(c.incoming&&!t.merchant_credited){st[3]='skip';cap[3]='no credit: hold goods, do not ask'}
+  else if(c.asked){st[3]=s==='MERCHANT_ASKED'&&!g?'active':'done';cap[3]=c.asked==='ask_goods'?'"saamaan diya?"':'"refund manzoor?"'}
+  else{st[3]=s==='ESCALATED'?'skip':'';cap[3]=s==='ESCALATED'?'not asked':'waiting'}
+  if(g){const both=g.two_key_verified;st[4]=both?'done':(['goods_not_delivered','refund_declined'].includes(g.choice)?'done':'blocked');cap[4]=`rule: ${short(g.readers.rule)} · sarvam: ${short(g.readers.sarvam)}`}
+  else if(s==='MERCHANT_ASKED'){st[4]='active';cap[4]='listening'}else{st[4]='skip';cap[4]='nothing to read'}
+  if(c.pending_confirm){st[5]='active';cap[5]='read back: waiting for confirm'}
+  else if(g&&g.allowed){st[5]='done';cap[5]=`ALLOW ${g.code} · w ${(g.warrant||{}).wid||''}`.slice(0,40)}
+  else if(g){st[5]=g.choice==='goods_not_delivered'?'done':'blocked';cap[5]=g.choice==='goods_not_delivered'?'next: ask refund consent':'DENY · '+short(g.reason,34)}
+  else if(c.incoming&&!t.merchant_credited){st[5]='skip';cap[5]='nothing to send: no credit'}
+  else{st[5]=ask&&s!=='ESCALATED'?'':'skip';cap[5]=ask?'locked':'no reply to send'}
+  if(s==='RESOLVED'){st[6]='done';cap[6]=`${c.response.response_code} acknowledged by NPCI`}
+  else if(s==='ESCALATED'){st[6]='blocked';cap[6]='with a person · handoff ready'}
+  else if(s==='NO_ACTION_NEEDED'){st[6]='done';cap[6]='nothing stuck: both told'}
+  else if(s==='COMPLAINT_RAISED'&&!ask){st[6]='active';cap[6]=`banks act by ${fmt(r.deadline)}`}
+  else if(s==='COMPLAINT_RAISED'&&c.incoming&&!t.merchant_credited){st[6]='active';cap[6]=`banks reverse by ${fmt(r.deadline)}`}
+  else{st[6]='';cap[6]='pending'}
+  let front=0;st.forEach((x,i)=>{if(x&&x!=='skip')front=i});
+  const pct=front/6*100;
+  const apply=()=>{for(let k=0;k<7;k++){$('n'+k).className='node '+(st[k]||'');$('nc'+k).textContent=cap[k]}};
+  if(fresh){st.forEach((x,i)=>setTimeout(()=>{$('n'+i).className='node '+(x||'');$('nc'+i).textContent=cap[i]},120+i*170));}
+  else apply();
+  setTimeout(()=>{$('fill').style.width=pct+'%';$('comet').style.left=pct+'%'},fresh?80:0);
+  const sc=SC.find(x=>x.txn_id===c.txn_id);$('pipeTitle').textContent=sc?`${sc.id} · ${sc.title}`:'';
+  $('pipeNote').textContent=({RESOLVED:'Resolved on the rails',ESCALATED:'Handed to a person with a full packet',NO_ACTION_NEEDED:'Nothing stuck: both sides told the truth',AWAITING_ACK:'Waiting for NPCI to acknowledge',MERCHANT_ASKED:'Waiting for the shopkeeper',COMPLAINT_RAISED:'Complaint live on NPCI UDIR'})[s]||s}
+function short(x,n=16){x=String(x??'none');return x.length>n?x.slice(0,n-1)+'…':x}
+function gate(c){
+  const g=c.last_gate,el=$('gateCard'),r=c.ruling||{},t=c.txn||{};
+  if(!(c.complaint&&(c.incoming||r.udir_code==='U023'))){el.style.display='none';return}
+  el.style.display='';
+  const key=JSON.stringify(g)+c.state;const anim=key!==lastGateKey;lastGateKey=key;
+  const ackd=!!(c.ack&&c.ack.udir_complaint),reader=HEALTH.second_reader;
+  const row=(st,title,sub,cls='')=>`<div class="ck ${st} ${cls}"><i>${st==='y'?'✓':st==='n'?'✕':'·'}</i><div>${title}${sub?`<small>${sub}</small>`:''}</div></div>`;
+  let rows,out,lock='🔒';
+  if(!g){
+    rows=[row(ackd?'y':'n','NPCI acknowledged the complaint',ackd?esc(c.complaint.complaint_id):'nothing can be answered until it does'),
+      row(t.merchant_credited?'y':'n','Payee ledger shows the credit',t.merchant_credited?`${inr(t.amount_inr)} credited ${fmt(t.credited_on)}`:'the shop holds no money: no 105 or 106'),
+      row(r.escalate?'n':'y','Case is not with a person',''),
+      row(['U022','U023'].includes(r.udir_code)?'y':'n','UDIR code allows a payee reply',`${r.udir_code} → 105 or 106`),
+      row('','Rule reader','<code>waiting for the answer</code>'),
+      row('','Sarvam 105B reader',reader==='sarvam-105b'?'<code>waiting for the answer</code>':reader==='single key override'?'<code>OFF · single key demo</code>':'<code>not available · a yes goes to a person</code>','sarv')];
+    out=`<div class="out wait">${t.merchant_credited?'Locked until the shopkeeper answers and every check is green.':'Nothing to send: the shop never got the money. The Soundbox tells the shopkeeper to hold the goods; the banks reverse by '+fmt(r.deadline)+'.'}</div>`;
+  }else{
+    const pos=['goods_delivered_yes','refund_yes'].includes(g.readers.rule);const sv=g.readers.sarvam;
+    rows=[row(g.acknowledged?'y':'n','NPCI acknowledged the complaint',esc(c.complaint.complaint_id)),
+      row(g.ledger_credited?'y':'n','Payee ledger shows the credit',g.ledger_credited?'checked again at decision time':'no credit: refused'),
+      row(g.escalated?'n':'y','Case is not with a person',''),
+      row(g.allowed||g.choice==='goods_not_delivered'?'y':'n','Answer matches the question asked',`asked: ${g.asked==='ask_goods'?'goods handed over?':'refund consent?'} · read as <code>${esc(g.choice)}</code>`),
+      row(pos?'y':'n','Rule reader',`<code>${esc(g.readers.rule)}</code>`),
+      row(g.two_key_verified&&sv?'y':(sv&&sv===g.readers.rule&&!pos&&g.choice!=='unclear'?'y':'n'),'Sarvam 105B reader',sv?`<code>${esc(sv)}</code> · ${esc(g.two_key||'')}`:`<code>${esc(g.two_key||'not used')}</code>`,'sarv')];
+    if(c.pending_confirm){out=`<div class="out"><div class="ticket n" style="background:linear-gradient(135deg,#2e2208,#211806);border-color:rgba(255,194,61,.45);color:#ffe7b0"><div class="l" style="color:var(--warn)">🔁</div><div class="r"><b>Spoken yes heard: read back sent</b><small>Both readers read the same transcript, so a dropped "nahi" would fool both. Nothing is signed until the shopkeeper says "haan, confirm".</small></div></div></div>`}
+    else if(g.allowed&&c.response&&c.response.acknowledged){lock='🔓';out=`<div class="out"><div class="ticket y"><div class="l">${g.code}</div><div class="r"><b>UDIR reply sent to NPCI</b><small>${esc(c.response.meaning)} · ${esc(c.response.complaint_id)}</small><small><code>warrant ${esc((g.warrant||{}).wid)} · single use · ${inr((g.warrant||{}).amount_inr)} · HMAC signed</code></small></div><span class="stamp">ACK BY NPCI</span></div></div>`}
+    else if(g.allowed){out=`<div class="out"><div class="ticket n"><div class="l">✕</div><div class="r"><b>Rail refused or never acknowledged</b><small>${esc((c.handoff||{}).reason||'')}</small></div><span class="stamp">NOT DONE</span></div></div>`}
+    else if(g.choice==='goods_not_delivered'){out=`<div class="out"><div class="ticket n" style="background:linear-gradient(135deg,#2e2208,#211806);border-color:rgba(255,194,61,.45);color:#ffe7b0"><div class="l" style="color:var(--warn)">?</div><div class="r"><b>No 105: goods were not given</b><small>Asking for explicit refund consent next. Only a clear yes sends 106.</small></div></div></div>`}
+    else out=`<div class="out"><div class="ticket n"><div class="l">✕</div><div class="r"><b>No 105 or 106 sent</b><small>${esc(g.reason)}</small></div><span class="stamp">BLOCKED</span></div></div>`;
+  }
+  el.innerHTML=`<div class="gh"><div><b>Action gate</b><small>A reply to NPCI needs every check. The rail also refuses any reply without a signed, single use warrant bound to this complaint, code and amount.</small></div><span class="lock">${lock}</span></div><div class="checks">${rows.join('')}</div>${out}`;
+  const cks=[...el.querySelectorAll('.ck')];
+  if(anim)cks.forEach((x,i)=>setTimeout(()=>x.classList.add('show'),90+i*140));else cks.forEach(x=>x.classList.add('show'));
+}
+function hand(c){const h=c.handoff,el=$('ticket');if(!h){el.style.display='none';return}el.style.display='';
+  el.innerHTML=`<h4>Handed to a person · ready to act</h4><p>${esc(h.summary)}</p><div class="cols"><div><div class="mini">Already said</div><ul>${(h.already_told||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div><div class="mini">Do not</div><ul>${(h.do_not||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div><div class="next">Next: ${esc(h.next_best_action)}</div>`}
+function soundbox(c,r,t){
+  const lcd=$('lcd');let txt='READY',cls='';
+  if(c.state==='RESOLVED'){txt=`${inr(t.amount_inr)} · ${c.response.response_code} SENT`}
+  else if(c.state==='ESCALATED'){txt='CASE WITH A PERSON';cls='bad'}
+  else if(c.state==='MERCHANT_ASKED'){txt=`${inr(t.amount_inr)} AAYA · JAWAB?`;cls='pend'}
+  else if(t.merchant_credited){txt=`${inr(t.amount_inr)} RECEIVED`}
+  else if(r.path){txt=`${inr(t.amount_inr)} NAHI AAYA`;cls='pend'}
+  lcd.textContent=txt;lcd.className='lcd '+cls;
+  const d=$('dev');d.classList.remove('listen');if(c.state==='MERCHANT_ASKED')d.classList.add('listen');
+  d.classList.add('talk');clearTimeout(window._tk);window._tk=setTimeout(()=>d.classList.remove('talk'),1700);
+  $('led1').className=t.merchant_credited?'on':'';$('led2').className=c.ack&&c.ack.udir_complaint?'on':'';$('led3').className=c.state==='RESOLVED'?'on':'';
+  const rl=$('rail');
+  if(c.response){rl.className='rail '+(c.response.acknowledged?'ok':'bad');rl.innerHTML=c.response.acknowledged?`<b>NPCI acknowledged ${c.response.response_code}</b>${esc(c.response.meaning)} · ${esc(c.response.complaint_id)}`:`<b>${c.response.response_code} sent, NOT acknowledged</b>Tatkal will not say done`}
+  else if(c.complaint){const a=c.complaint.acknowledged;rl.className='rail '+(a?'ok':'bad');rl.innerHTML=`<b>${c.complaint.code} ${c.incoming?'received':'raised'} · ${a?'acknowledged':'NOT acknowledged'}</b>${esc(c.complaint.complaint_id)} · ${esc(c.complaint.route)}`+(c.state==='AWAITING_ACK'?`<button class="btn sm" onclick="recheck()">Ask NPCI again (status check)</button>`:'')}
+  else{rl.className='rail';rl.innerHTML='<b>No UDIR action needed</b>The ledger explains what happened'}
+}
+function qchips(c){const el=$('mchips');if(c.state==='MERCHANT_ASKED'&&c.pending_confirm){el.innerHTML=[['Haan, confirm','Haan, confirm'],['Nahi','Nahi']].map(([t,l])=>`<button class="q" onclick="merch(this.dataset.t,'voice')" data-t="${esc(t)}">${esc(l)}</button>`).join('');return}
+  if(c.state!=='MERCHANT_ASKED'||!QCH[c.asked]){el.innerHTML='<div class="wait">No question pending</div>';return}
+  el.innerHTML=QCH[c.asked].map(([t,l])=>`<button class="q" onclick="merch(this.dataset.t)" data-t="${esc(t)}">${esc(l)}</button>`).join('')}
+function showGuard(g){
+  if(!g)return;let html=esc(g.draft);
+  if(g.blocked){const vs=[...g.verdict.violations].sort((a,b)=>b.start-a.start);let d=g.draft;for(const v of vs){d=d.slice(0,v.start)+'\u0001'+d.slice(v.start,v.end)+'\u0002'+d.slice(v.end)}html=esc(d).replaceAll('\u0001','<mark>').replaceAll('\u0002','</mark>')}
+  $('guard').innerHTML=`<div class="vr"><span class="badge ${g.blocked?'bad':'ok'}">${g.blocked?'BLOCKED':'PASSED'}</span><div style="flex:1"><div class="said">${html}</div><div class="src">written by ${esc(g.source)}${g.audience?' · to '+esc(g.audience):''}</div>
+   ${g.llm_error?`<div class="err">LLM call failed (${esc(g.llm_error)}). Engine template used.</div>`:''}
+   ${g.blocked?`<ul class="viol">${g.verdict.violations.map(v=>`<li>${esc(v.reason)}</li>`).join('')}</ul><div class="instead"><b>Spoken instead:</b> ${esc(g.final)}</div>`:''}</div></div>`}
+
+const BAD=['guard_blocked','rail_refused','handoff_created','udir_complaint_raised_unacknowledged','udir_response_unacknowledged','llm_failed'],GOOD=['guard_passed','udir_response_acknowledged','warrant_issued','udir_complaint_raised','udir_complaint_received'];
+async function refreshAudit(){const j=await api('/audit?limit=150'+(cur?'&case_id='+cur:''));const v=j.verify;
+  if(brokenAt==null){$('chainV').textContent=v.valid?`⛓ Chain valid · ${v.count} blocks`:`Chain BROKEN at #${v.broken_at}`;$('chainV').className='cs '+(v.valid?'ok':'bad')}
+  $('audit').innerHTML=j.events.slice().reverse().map(e=>`<div class="ev ${brokenAt!=null&&e.seq>=brokenAt?'broken':''}"><span class="s">#${e.seq}</span><span class="a ${e.actor}">${esc(e.actor.replace('_',' '))}</span><span class="k ${BAD.includes(e.kind)?'bad':GOOD.includes(e.kind)?'good':''}">${esc(e.kind)}</span><span>${esc(summ(e))}</span><span class="h">${e.hash.slice(0,12)}…</span></div>`).join('')}
+function summ(e){const p=e.payload||{};switch(e.kind){
+  case'ruling':return `${p.path} ${p.udir_code||''} ${p.rbi_row?'row '+p.rbi_row+', deadline '+p.deadline:''}`;
+  case'state':return `${p.from} → ${p.to} (${p.why})`;
+  case'guard_blocked':return `[${p.source}] "${p.draft}" ✕ ${(p.violations||[]).join('; ')}`;
+  case'guard_passed':return `[${p.source}] passed`;
+  case'message_sent':return `to ${p.to}: ${p.text}`;
+  case'merchant_said':return `"${p.text}" → ${p.read_as||p.ignored} · rule: ${p.deterministic||'–'} · Sarvam: ${p.llm||'–'}${p.two_key?' · '+p.two_key:''}`;
+  case'customer_said':return `"${p.text}" → ${p.intent}`;
+  case'action_decision':return `${p.choice}: ${p.allowed?'ALLOW '+p.code:'DENY'} · ${p.reason}`;
+  case'warrant_issued':return `warrant ${p.wid} for ${p.code} on ${p.complaint_id}, ₹${p.amount_inr}`;
+  case'udir_response_acknowledged':case'udir_response_unacknowledged':return `${p.response_code} on ${p.complaint_id}: ${p.meaning}`;
+  case'udir_complaint_raised':case'udir_complaint_received':case'udir_complaint_raised_unacknowledged':case'udir_complaint_received_unacknowledged':case'udir_status_check':return `${p.code} ${p.complaint_id} · ${p.acknowledged?'acknowledged':'NOT acknowledged'}`;
+  case'handoff_created':return `to a person: ${p.reason}`;
+  case'no_payee_question':return p.why;
+  case'case_opened':return `opened by ${p.opened_by} · PSP ${(p.psp_status||{}).status} · shop credited: ${(p.ledger||{}).merchant_credited}`;
+  case'rail_refused':return `rail refused: ${p.error}`;
+  case'llm_failed':return `LLM failed: ${p.error} → template`;
+  default:return JSON.stringify(p).slice(0,150)}}
+async function tamper(){try{const r=await api('/audit/tamper',{method:'POST'});brokenAt=r.verify.broken_at;$('chainV').textContent=`Copy BROKEN at #${r.verify.broken_at}`;$('chainV').className='cs bad';
+  $('chainNote').textContent=`Simulated insider edit on a copy: ruling #${r.tampered_seq} changed to claim a T+1 deadline. ${r.verify.why}. Every later block no longer links. The real log is ${r.real_log.valid?'still valid':'BROKEN'}.`;refreshAudit();setTimeout(()=>{brokenAt=null},9000)}catch(e){toast(e.message)}}
+async function anchor(){const a=await api('/audit/anchor');$('chainNote').textContent=`Signed head of ${a.count} blocks: ${a.head.slice(0,16)}… · HMAC ${a.signature.slice(0,16)}… · copy kept outside the database in data/anchors.jsonl`}
+function tab(w){$('paneA').style.display=w==='a'?'':'none';$('paneE').style.display=w==='e'?'':'none';$('tabA').className=w==='a'?'on':'';$('tabE').className=w==='e'?'on':'';if(w==='e')loadEval()}
+const GROUPS=[['Decisions and actions',['A ','D ','D2','D3','E ','R ']],['Live Sarvam',['G ','H ','F ','F audit']],['Words guard',['B ','C1','C2','C3']]];
+async function loadEval(){try{const s=await api('/eval/latest');let h='';
+  if(s.headline)h+=`<div class="tiles">${s.headline.map((x,i)=>`<div class="tile ${i==4?'sun':'ok'}"><b data-v="${esc(x.value)}">${esc(x.value)}</b><span>${esc(x.label)}</span><small>${esc(x.sub)}</small></div>`).join('')}</div>`;
+  h+=`<div class="evn">${esc(s.note)} Every block opens to its numbers and notes. CSVs are in eval/results.</div>`;
+  const used=new Set();
+  for(const [g,keys] of GROUPS){const bl=s.blocks.filter(b=>keys.some(k=>b.title.startsWith(k))&&!used.has(b.title));bl.forEach(b=>used.add(b.title));if(!bl.length)continue;h+=`<div class="grp"><h4>${g}</h4>${bl.map(blk).join('')}</div>`}
+  $('paneE').innerHTML=h;
+  document.querySelectorAll('.tile b').forEach(b=>{const m=String(b.dataset.v).match(/^(\d+)\/(\d+)$/);if(!m)return;const a=+m[1],n=+m[2];let k=0;const step=()=>{k++;const v=Math.round(a*Math.min(1,k/24));b.textContent=`${v}/${n}`;if(k<24)requestAnimationFrame(step)};step()})
+ }catch(e){$('paneE').innerHTML='<div class="evn">Run <code>python -m eval.run_eval</code> first.</div>'}}
+function blk(b){return `<details><summary><span class="t">${esc(b.title)}</span><span class="v">${esc(b.metrics[0].value)}</span></summary><div class="db"><div class="mr">${b.metrics.map(m=>`<div><b>${esc(m.value)}</b>${esc(m.label)}</div>`).join('')}</div>${b.note?esc(b.note):''}</div></details>`}
+let VOICE_RUN=0,CUR_AUDIO=null,SPEAK_DONE=Promise.resolve(),PAUSED=false,SPEAKING=false;
+function playB64(b64,mime){return new Promise(res=>{const a=new Audio(`data:${mime||'audio/mpeg'};base64,${b64}`);CUR_AUDIO=a;a.onended=res;a.onerror=res;a._stop=res;if(PAUSED)return;a.play().catch(res)})}
+function voiceUI(){$('vctl').classList.toggle('on',SPEAKING);$('vPause').textContent=PAUSED?'▶ Resume':'⏸ Pause';$('vtx').textContent=PAUSED?'Voice paused':'Tatkal is speaking';$('vctl').classList.toggle('paused',PAUSED);$('dev').classList.toggle('talk',SPEAKING&&!PAUSED&&VOICE_SHOP)}
+let VOICE_SHOP=false;
+function togglePause(){if(!SPEAKING)return;PAUSED=!PAUSED;if(CUR_AUDIO){try{PAUSED?CUR_AUDIO.pause():CUR_AUDIO.play()}catch(e){}}voiceUI()}
+function stopVoice(){VOICE_RUN++;PAUSED=false;if(CUR_AUDIO){try{CUR_AUDIO.pause();CUR_AUDIO._stop&&CUR_AUDIO._stop()}catch(e){}}SPEAKING=false;voiceUI()}
+async function sayText(t,shop){
+  const run=++VOICE_RUN;if(CUR_AUDIO){try{CUR_AUDIO.pause();CUR_AUDIO._stop&&CUR_AUDIO._stop()}catch(e){}}
+  PAUSED=false;SPEAKING=true;VOICE_SHOP=!!shop;voiceUI();
+  let done;SPEAK_DONE=new Promise(r=>done=r);
+  const slow=setTimeout(()=>toast('🔊 Preparing Bulbul voice…',2500),700);
+  try{const first=await api('/voice/tts',{method:'POST',body:JSON.stringify({text:t,part:0})});clearTimeout(slow);
+    const rest=[];for(let k=1;k<first.parts;k++)rest.push(api('/voice/tts',{method:'POST',body:JSON.stringify({text:t,part:k})}));
+    if(run!==VOICE_RUN)return;await playB64(first.audio_base64,first.mime);
+    for(const pr of rest){const x=await pr;while(PAUSED&&run===VOICE_RUN)await sleep(120);if(run!==VOICE_RUN)return;await playB64(x.audio_base64,x.mime)}
+  }catch(e){clearTimeout(slow);toast('Voice unavailable, text still works: '+e.message)}finally{if(run===VOICE_RUN){SPEAKING=false;PAUSED=false;voiceUI()}done()}}
+async function waitSpeech(){let t=0,fin=false;SPEAK_DONE.then(()=>fin=true);while(!fin&&PLAY){await sleep(200);if(!PAUSED)t+=200;if(t>25000)break}}
+async function mic(who){const btn=$(who==='customer'?'custMic':'merchMic');
+  if(rec){rec.stop();return}
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);btn.classList.add('rec');toast('Listening… tap the mic again to stop');if(who==='merchant')$('dev').classList.add('listen');
+    rec.ondataavailable=e=>chunks.push(e.data);
+    rec.onstop=async()=>{btn.classList.remove('rec');st.getTracks().forEach(t=>t.stop());rec=null;const fd=new FormData();fd.append('file',new Blob(chunks,{type:'audio/webm'}),'clip.webm');
+      try{const r=await fetch('/voice/stt',{method:'POST',body:fd});const j=await r.json();if(!r.ok)throw new Error(j.detail);toast('Saaras heard: '+j.transcript);who==='customer'?cust(j.transcript):merch(j.transcript,'voice')}catch(e){toast('Speech unavailable, type instead: '+e.message)}};
+    rec.start();setTimeout(()=>rec&&rec.state==='recording'&&rec.stop(),12000)}catch(e){toast('Microphone blocked: '+e.message)}}
+
+/* ---------- autoplay */
+const SCRIPT=[
+ ['Ravi paid ₹450 at Sharma Kirana from PhonePe. His app says deemed and the Soundbox stayed silent, so he raised a U022 complaint.',()=>openCase('PTM41870340'),5200],
+ ['Tatkal reads the ledger first. The shop WAS credited, so it asks the shopkeeper one question on the Soundbox.',null,4300],
+ ['The shopkeeper hedges: "Haan de diya, lekin usne kuch nahi liya".',()=>merch('Haan de diya, lekin usne kuch nahi liya'),5600],
+ ['A yes with a "but" is not a yes. Both readers say unclear, so Tatkal repeats what it heard and asks again.',null,4300],
+ ['Now a clear answer: "Haan, saamaan de diya". The rule reader and Sarvam 105B must read it the same way.',()=>merch('Haan, saamaan de diya'),6200],
+ ['Every check is green. A signed, single use warrant is minted and the 105 goes to NPCI. Ravi is told what the shop confirmed.',null,5200],
+ ['The trap. Same case, but the goods were not given and the shopkeeper says he already refunded.',async()=>{await openCase('PTM41870340');await sleep(1600);await merch('Nahi, saamaan nahi diya')},5600],
+ ['"Already refunded" is a claim, not consent. No 106 is sent. A person gets a full handoff packet.',()=>merch('Refund already kar diya'),6200],
+ ['S8: Sameer\'s U022 arrives from Google Pay, but the ledger shows the shop was never paid. Tatkal does not ask about goods: hold them, the banks reverse by 5 Nov.',()=>openCase('PTM41870388'),6800],
+ ['S7: Pooja\'s ₹600 is two days past the RBI deadline. ₹200 compensation is owed. Straight to a person.',()=>openCase('PTM41869911'),6200],
+ ['Every step is a block in a hash chain. An insider edit to one ruling breaks every block after it.',async()=>{tab('a');document.querySelector('.lower').scrollIntoView({behavior:'smooth'});await sleep(900);tamper()},6200],
+ ['Now at Diwali scale: 1 lakh synthetic stuck payments through the same rule engine and the same guard.',async()=>{openRush();await sleep(400);startRush()},17000],
+ ['The rules decide. Sarvam listens, reads and speaks. Nothing moves on one reader\'s word.',()=>{closeRush();window.scrollTo({top:0,behavior:'smooth'})},5000]];
+async function autoplay(){
+  if(PLAY)return stopPlay();
+  if(HEALTH.second_reader==='none')toast('No second reader is configured, so the clear yes in step 5 will go to a person. Add SARVAM_API_KEY (or TATKAL_SINGLE_KEY_DEMO=1) for the full demo.',7000);
+  PLAY=true;$('playBtn').textContent='■ Stop';$('cap').classList.add('on');
+  for(let i=0;i<SCRIPT.length&&PLAY;i++){const [text,act,ms]=SCRIPT[i];$('capN').textContent=`${i+1}/${SCRIPT.length}`;$('capX').textContent=text;
+    const b=$('capBar');b.style.transition='none';b.style.width='0';void b.offsetWidth;b.style.transition=`width ${ms}ms linear`;b.style.width='100%';
+    if(act){try{await act()}catch(e){}}await sleep(ms);while(PAUSED&&PLAY)await sleep(200);
+    if(PLAY&&$('auto').checked)await waitSpeech()}   // let Bulbul finish the sentence before the next step
+  stopPlay()}
+function stopPlay(){PLAY=false;$('playBtn').textContent='▶ Play demo';$('cap').classList.remove('on')}
+
+/* ---------- judges' phones */
+let JOPEN=false,JT=null,LIVEON=false,LASTSIG='',SEEN=0;
+async function openJudges(){JOPEN=true;$('judges').classList.add('on');await judgeInfo();startLive()}
+function closeJudges(){JOPEN=false;$('judges').classList.remove('on')}
+async function startTunnel(){const b=$('tunBtn'),n=$('tunNote');b.disabled=true;b.textContent='Starting secure link…';
+  try{let t=await api('/live/tunnel?port='+(location.port||80),{method:'POST'});
+    for(let i=0;i<40&&t.state==='starting';i++){await sleep(500);t=await api('/live/tunnel')}
+    if(t.state==='on'){n.textContent='Secure link live: judges who scanned the old code see an "Open the secure link" button.';b.textContent='🔒 Secure link on';await judgeInfo()}
+    else{n.textContent=t.error||'Could not start the tunnel';b.textContent='🔒 Start secure link (phone voice)';b.disabled=false}}
+  catch(e){n.textContent=e.message;b.disabled=false;b.textContent='🔒 Start secure link (phone voice)'}}
+async function setTunnel(){const u=$('tunnel').value.trim();if(!u)return;try{await api('/live/url',{method:'POST',body:JSON.stringify({url:u})});judgeInfo()}catch(e){toast(e.message)}}
+async function judgeInfo(){try{const i=await api('/live/info?port='+(location.port||80));$('qr').innerHTML=i.qr_svg||'<div style="color:#101828;padding:20px;text-align:center">QR needs the segno package.<br>Open this link instead.</div>';$('jurl').textContent=i.join_url;
+  $('micnote').textContent=i.join_url.startsWith('https')?'HTTPS: judges can speak into their phones.':i.mic_note;if((i.public_url||'').startsWith('https')){$('tunBtn').textContent='🔒 Secure link on';$('tunBtn').disabled=true}}catch(e){}}
+function startLive(){if(LIVEON)return;LIVEON=true;JT=setInterval(liveTick,1400);liveTick()}
+async function liveTick(){
+  try{const [sb,info]=await Promise.all([api('/live/scoreboard'),api('/live/info?port='+(location.port||80))]);
+    $('scA').textContent=sb.shopkeeper_replies;$('scS').textContent=sb.npci_replies_sent;$('scH').textContent=sb.held_back;
+    $('plist').innerHTML=info.players.length?info.players.map(p=>`<span class="pp">${p.role==='shopkeeper'?'🔊':'📱'} ${esc(p.name)}</span>`).join(''):'<span style="color:var(--muted)">Nobody yet. Scan the code.</span>';
+    $('att').innerHTML=sb.recent.slice().reverse().map(a=>`<div class="at ${a.action?'ok':a.decision?'no':''}"><b>${esc(a.name)}</b> (${a.role}): "${esc(a.text)}"<div class="rd">${a.role==='shopkeeper'?(a.ignored?'no question pending':`rule ${esc(a.rule)} · Sarvam ${esc(a.sarvam)} → ${a.action?esc(a.action)+' sent':'nothing sent'}`):esc(a.decision)}</div></div>`).join('')||'<div style="color:var(--muted)">Attempts appear here live.</div>';
+    const lc=$('livechip');if(info.players.length){lc.classList.add('on');$('lcTitle').textContent=`LIVE · ${info.players.length} phone${info.players.length>1?'s':''}`;$('lcSub').textContent=`${sb.shopkeeper_replies} replies · ${sb.npci_replies_sent} sent to NPCI`}else lc.classList.remove('on');
+    if(sb.attempts>SEEN&&SEEN>0){const a=sb.recent[sb.recent.length-1];toast(`📱 ${a.name}: "${a.text}" → ${a.role==='shopkeeper'?(a.action?a.action+' sent':'nothing sent'):a.decision}`,5000)}SEEN=sb.attempts;
+    if(cur){const c=await api('/cases/'+cur);const sig=c.state+'|'+c.transcript.length;if(LASTSIG&&sig!==LASTSIG)render(c);LASTSIG=sig}
+  }catch(e){}}
+/* ---------- Diwali rush */
+let RT=null,CELLS=[],CTX=null,COLS=60,ROWS=26;
+const RC={t:'#2bd48f',c:'#00B9F1',a:'#a493ff',p:'#ff5c6c'};
+function openRush(){$('rush').classList.add('on');drawWall(0);rushPoll()}
+function closeRush(){$('rush').classList.remove('on');clearInterval(RT);RT=null}
+async function startRush(){CELLS=[];drawWall(0);await api('/sim/rush',{method:'POST',body:JSON.stringify({n:100000,seconds:14})});clearInterval(RT);RT=setInterval(rushPoll,250)}
+const nf=n=>Number(n||0).toLocaleString('en-IN');
+async function rushPoll(){const s=await api('/sim/rush');if(!s.target){return}
+  $('rN').textContent=nf(s.target);$('rDone').textContent=nf(s.done);$('rC').textContent=nf(s.complaints);$('rH').textContent=nf(s.hold_goods);$('rQ').textContent=nf(s.questions);
+  $('rP').textContent=nf(s.to_person);$('rL').textContent=nf(s.late);$('rM').textContent='₹'+nf(s.compensation_inr);$('rZ').textContent=nf(s.guard_failures);
+  $('rZs').textContent=`${nf(s.messages_checked)} customer and shopkeeper messages checked by the guard (${nf(s.unique_messages)} distinct texts).`;
+  $('rS').textContent=s.done?`Engine time ${s.engine_seconds.toFixed(2)} s for ${nf(s.done)} cases (≈ ${nf(Math.round(s.done/Math.max(.001,s.engine_seconds)))} per second on this laptop, guard included). Playback slowed so you can watch.`:'';
+  $('mix').innerHTML=Object.entries(s.mix||{}).map(([k,v])=>`${esc(k)}: ${esc(v)}`).join('<br>');
+  const tot=Object.values(s.paths||{}).reduce((a,b)=>a+b,0)||1;
+  $('pbars').innerHTML=Object.entries(s.paths||{}).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="pb"><span>${k}</span><div><i style="width:${v/tot*100}%"></i></div><span style="text-align:right">${nf(v)}</span></div>`).join('');
+  const want=Math.round(s.done/s.target*COLS*ROWS);const rec=s.recent||'t';let k=0;while(CELLS.length<want){CELLS.push(rec[(k++*7+CELLS.length)%rec.length])}
+  drawWall(s.running);if(s.finished){clearInterval(RT);RT=null;drawWall(false)}}
+function drawWall(running){const cv=$('cv');CTX=CTX||cv.getContext('2d');const W=cv.width,H=cv.height,cw=W/COLS,ch=H/ROWS;CTX.clearRect(0,0,W,H);
+  for(let i=0;i<COLS*ROWS;i++){const x=(i%COLS)*cw+cw/2,y=Math.floor(i/COLS)*ch+ch/2;const c=CELLS[i];
+    if(!c){CTX.fillStyle='#141c2e';CTX.beginPath();CTX.arc(x,y,cw*.18,0,7);CTX.fill();continue}
+    const col=RC[c]||'#2bd48f',fresh=running&&i>CELLS.length-COLS*1.5,f=.75+Math.random()*.25;
+    const g=CTX.createRadialGradient(x,y,0,x,y,cw*(fresh?.95:.62));g.addColorStop(0,'#fff');g.addColorStop(.18,col);g.addColorStop(1,'rgba(0,0,0,0)');
+    CTX.globalAlpha=f;CTX.fillStyle=g;CTX.beginPath();CTX.arc(x,y,cw*(fresh?.95:.62),0,7);CTX.fill();CTX.globalAlpha=1}}
+setInterval(()=>{if($('rush').classList.contains('on')&&CELLS.length)drawWall(!!RT)},180);
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea,select'))return;
+  if(e.key==='Escape'){if(SPEAKING)stopVoice();['guide','judges'].forEach(id=>$(id).classList.remove('on'));if($('rush').classList.contains('on'))closeRush();$('menu').classList.remove('open');return}
+  if(/^[1-8]$/.test(e.key)&&SC[+e.key-1]){openCase(SC[+e.key-1].txn_id);return}
+  const k=e.key.toLowerCase();
+  if(k==='p')autoplay();else if(k==='j')openJudges();else if(k==='r')openRush();else if(k==='?'||k==='h')$('guide').classList.add('on');
+  else if(k==='k'){togglePause()}
+  else if(k==='a'){$('auto').checked=!$('auto').checked;toast('Auto speak '+($('auto').checked?'on':'off'),1500)}});
+init();
+
+</script>
+</body>
+</html>
